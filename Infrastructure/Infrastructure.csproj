@@ -32,6 +32,15 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
       <None Remove="docker\images\pg\migrations\003-create-users-table.sql" />
+      <None Update="docker\images\pg\migrations\005-create-utilizador-table.sql">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="docker\images\pg\migrations\006-create-projeto-table.sql">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="docker\images\pg\migrations\007-create-tarefa-table.sql">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
