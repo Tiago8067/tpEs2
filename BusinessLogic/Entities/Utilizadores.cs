@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BusinessLogic.Entities;
 
-public partial class Utilizadore
+public partial class Utilizadores
 {
     public Guid Id { get; set; }
 
