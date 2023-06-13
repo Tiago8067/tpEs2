@@ -1,3 +1,5 @@
+global using BusinessLogic.Entities;
+using Backend.Services.UtilizadorService;
 using BusinessLogic.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
 
 // Add default connection string for the Web API controllers
 builder.Services.AddDbContext<ES2DbContext>(options => 
