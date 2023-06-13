@@ -5,38 +5,6 @@ namespace Backend.Services.UtilizadorService;
 
 public class UtilizadorService : IUtilizadorService
 {
-    private static List<Utilizador> _utilizadores = new List<Utilizador>
-    {
-        new Utilizador
-        {
-            Id = Guid.NewGuid(),
-            Email = "soares@gmail.com", 
-            Username = "soares",
-            Password = "1234",
-            Nome = "Tiago Soares",
-            Genero = "Masculino",
-            DataDeNascimento = new DateOnly(1990, 08, 30),
-            CodigoPostal = "1234-123",
-            Morada = "Sai do Sol",
-            TipoUtilizador = "ADMIN",
-            EstadoUtilizador = "ATIVO"
-        },
-        new Utilizador
-        {
-            Id = Guid.NewGuid(),
-            Email = "basil@gmail.com", 
-            Username = "basil",
-            Password = "1234",
-            Nome = "Basilio Barbosa",
-            Genero = "Masculino",
-            DataDeNascimento = new DateOnly(1990, 08, 30),
-            CodigoPostal = "1234-123",
-            Morada = "Sai do Sol",
-            TipoUtilizador = "ADMIN",
-            EstadoUtilizador = "ATIVO"
-        }
-    };
-
     private readonly TarefasDbContext _context;
 
     public UtilizadorService(TarefasDbContext context)
@@ -64,7 +32,7 @@ public class UtilizadorService : IUtilizadorService
     {
         _context.Utilizadores.Add(utilizador);
         await _context.SaveChangesAsync();
-        return _utilizadores;
+        return await _context.Utilizadores.ToListAsync();
     }
 
     public async Task<List<Utilizador>?> UpdateUtilizador(Guid id, Utilizador request)
@@ -89,7 +57,7 @@ public class UtilizadorService : IUtilizadorService
 
         await _context.SaveChangesAsync();
         
-        return _utilizadores;
+        return await _context.Utilizadores.ToListAsync();
     }
 
     public async Task<List<Utilizador>?> DeleteUtilizador(Guid id)
@@ -101,6 +69,6 @@ public class UtilizadorService : IUtilizadorService
         }
         _context.Utilizadores.Remove(utilizador);
         await _context.SaveChangesAsync();
-        return _utilizadores;
+        return await _context.Utilizadores.ToListAsync();
     }
 }
