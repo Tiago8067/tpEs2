@@ -2,9 +2,9 @@ namespace Backend.Services.UtilizadorService;
 
 public interface IUtilizadorService
 {
-    List<Utilizador> GetAllUtilizadores();
-    Utilizador? GetUtilizadorById(Guid id);
-    List<Utilizador> AddUtilizador(Utilizador utilizador);
-    List<Utilizador>? UpdateUtilizador(Guid id, Utilizador request);
-    List<Utilizador>? DeleteUtilizador(Guid id);
+    Task<List<Utilizador>> GetAllUtilizadores();
+    Task<Utilizador?> GetUtilizadorById(Guid id);
+    Task<List<Utilizador>> AddUtilizador(Utilizador utilizador);
+    Task<List<Utilizador>?> UpdateUtilizador(Guid id, Utilizador request);
+    Task<List<Utilizador>?> DeleteUtilizador(Guid id);
 }

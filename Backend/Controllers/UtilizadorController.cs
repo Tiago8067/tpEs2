@@ -17,13 +17,13 @@ public class UtilizadorController: ControllerBase
     [HttpGet("GetAllUtilizadores")]
     public async Task<ActionResult<List<Utilizador>>> GetAllUtilizadores()
     {
-        return _utilizadorService.GetAllUtilizadores();
+        return await _utilizadorService.GetAllUtilizadores();
     }
     
     [HttpGet("{id}")]
     public async Task<ActionResult<Utilizador>> GetUtilizadorById(Guid id)
     {
-        var result = _utilizadorService.GetUtilizadorById(id);
+        var result = await _utilizadorService.GetUtilizadorById(id);
         if (result is null)
         {
             return NotFound("Este Utilizador não Existe");
@@ -34,14 +34,14 @@ public class UtilizadorController: ControllerBase
     [HttpPost("AddUtilizador")]
     public async Task<ActionResult<List<Utilizador>>> AddUtilizador(Utilizador utilizador)
     {
-        var result = _utilizadorService.AddUtilizador(utilizador);
+        var result = await _utilizadorService.AddUtilizador(utilizador);
         return Ok(result);
     }
     
     [HttpPut("{id}")]
     public async Task<ActionResult<List<Utilizador>>> UpdateUtilizador(Guid id, Utilizador request)
     {
-        var result = _utilizadorService.UpdateUtilizador(id, request);
+        var result = await _utilizadorService.UpdateUtilizador(id, request);
         if (result is null)
         {
             return NotFound("Este Utilizador não Existe");
@@ -52,7 +52,7 @@ public class UtilizadorController: ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult<List<Utilizador>>> DeleteUtilizador(Guid id)
     {
-        var result = _utilizadorService.DeleteUtilizador(id);
+        var result = await _utilizadorService.DeleteUtilizador(id);
         if (result is null)
         {
             return NotFound("Este Utilizador não Existe");

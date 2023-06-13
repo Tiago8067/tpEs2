@@ -1,3 +1,6 @@
+using BusinessLogic.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace Backend.Services.UtilizadorService;
 
 public class UtilizadorService : IUtilizadorService
@@ -33,15 +36,23 @@ public class UtilizadorService : IUtilizadorService
             EstadoUtilizador = "ATIVO"
         }
     };
-    
-    public List<Utilizador> GetAllUtilizadores()
+
+    private readonly TarefasDbContext _context;
+
+    public UtilizadorService(TarefasDbContext context)
     {
-        return _utilizadores;
+        _context = context;
+    }
+    
+    public async Task<List<Utilizador>> GetAllUtilizadores()
+    {
+        var utilizadores = await _context.Utilizadores.ToListAsync();
+        return utilizadores;
     }
 
-    public Utilizador? GetUtilizadorById(Guid id)
+    public async Task<Utilizador?> GetUtilizadorById(Guid id)
     {
-        var utilizador = _utilizadores.Find(x => x.Id == id);
+        var utilizador = await _context.Utilizadores.FindAsync(id);
         if (utilizador is null)
         {
             return null;
@@ -49,15 +60,16 @@ public class UtilizadorService : IUtilizadorService
         return utilizador;
     }
 
-    public List<Utilizador> AddUtilizador(Utilizador utilizador)
+    public async Task<List<Utilizador>> AddUtilizador(Utilizador utilizador)
     {
-        _utilizadores.Add(utilizador);
+        _context.Utilizadores.Add(utilizador);
+        await _context.SaveChangesAsync();
         return _utilizadores;
     }
 
-    public List<Utilizador>? UpdateUtilizador(Guid id, Utilizador request)
+    public async Task<List<Utilizador>?> UpdateUtilizador(Guid id, Utilizador request)
     {
-        var utilizador = _utilizadores.Find(x => x.Id == id);
+        var utilizador = await _context.Utilizadores.FindAsync(id);
         if (utilizador is null)
         {
             return null;
@@ -74,18 +86,21 @@ public class UtilizadorService : IUtilizadorService
         utilizador.Morada = request.Morada;
         utilizador.TipoUtilizador = request.TipoUtilizador;
         utilizador.EstadoUtilizador = request.EstadoUtilizador;
+
+        await _context.SaveChangesAsync();
         
         return _utilizadores;
     }
 
-    public List<Utilizador>? DeleteUtilizador(Guid id)
+    public async Task<List<Utilizador>?> DeleteUtilizador(Guid id)
     {
-        var utilizador = _utilizadores.Find(x => x.Id == id);
+        var utilizador = await _context.Utilizadores.FindAsync(id);
         if (utilizador is null)
         {
             return null;
         }
-        _utilizadores.Remove(utilizador);
+        _context.Utilizadores.Remove(utilizador);
+        await _context.SaveChangesAsync();
         return _utilizadores;
     }
 }

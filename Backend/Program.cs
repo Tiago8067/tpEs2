@@ -14,9 +14,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
 
 // Add default connection string for the Web API controllers
-builder.Services.AddDbContext<ES2DbContext>(options => 
+/*builder.Services.AddDbContext<ES2DbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection"))
-);
+);*/
+builder.Services.AddDbContext<TarefasDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
 var app = builder.Build();
 
