@@ -24,7 +24,7 @@ public partial class tarefasAProjetosDbContext : DbContext
 
     public virtual DbSet<Tarefa> Tarefas { get; set; }
 
-    public virtual DbSet<Utilizadore> Utilizadores { get; set; }
+    public virtual DbSet<Utilizador> Utilizadores { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -122,7 +122,7 @@ public partial class tarefasAProjetosDbContext : DbContext
                 .HasConstraintName("tarefas_projeto_id_fkey");
         });
 
-        modelBuilder.Entity<Utilizadore>(entity =>
+        modelBuilder.Entity<Utilizador>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("utilizadores_pkey");
 
