@@ -7,25 +7,25 @@ public partial class Utilizadore
 {
     public Guid Id { get; set; }
 
-    public string Email { get; set; } = null!;
+    public string? Email { get; set; }
 
-    public string Username { get; set; } = null!;
+    public string? Username { get; set; }
 
-    public string Password { get; set; } = null!;
+    public string? Password { get; set; }
 
-    public string Nome { get; set; } = null!;
+    public string? Nome { get; set; }
 
-    public string Genero { get; set; } = null!;
+    public string? Genero { get; set; }
 
-    public DateOnly DataDeNascimento { get; set; }
+    public DateOnly? DataDeNascimento { get; set; }
 
-    public string CodigoPostal { get; set; } = null!;
+    public string? CodigoPostal { get; set; }
 
-    public string Morada { get; set; } = null!;
+    public string? Morada { get; set; }
 
-    public string TipoUtilizador { get; set; } = null!;
+    public string? TipoUtilizador { get; set; }
 
-    public string EstadoUtilizador { get; set; } = null!;
+    public string? EstadoUtilizador { get; set; }
 
     public virtual ICollection<Projeto> Projetos { get; set; } = new List<Projeto>();
 }

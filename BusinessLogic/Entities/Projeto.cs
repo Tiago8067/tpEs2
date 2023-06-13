@@ -7,11 +7,11 @@ public partial class Projeto
 {
     public Guid Id { get; set; }
 
-    public string Nome { get; set; } = null!;
+    public string? Nome { get; set; }
 
-    public string NomeCliente { get; set; } = null!;
+    public string? NomeCliente { get; set; }
 
-    public double PrecoPorHora { get; set; }
+    public double? PrecoPorHora { get; set; }
 
     public Guid? UtilizadorId { get; set; }
 
