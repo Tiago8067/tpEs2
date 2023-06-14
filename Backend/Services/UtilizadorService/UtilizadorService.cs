@@ -14,8 +14,9 @@ public class UtilizadorService : IUtilizadorService
     
     public async Task<List<Utilizador>> GetAllUtilizadores()
     {
-        var utilizadores = await _context.Utilizadores.ToListAsync();
-        return utilizadores;
+        /*var utilizadores = await _context.Utilizadores.ToListAsync();
+        return utilizadores;*/
+        return await _context.Utilizadores.ToListAsync();
     }
 
     public async Task<Utilizador?> GetUtilizadorById(Guid id)

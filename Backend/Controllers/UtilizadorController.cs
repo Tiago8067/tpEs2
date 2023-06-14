@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
 
-[Microsoft.AspNetCore.Components.Route("api/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class UtilizadorController: ControllerBase
 {
@@ -15,7 +15,8 @@ public class UtilizadorController: ControllerBase
     }
     
     [HttpGet("GetAllUtilizadores")]
-    public async Task<ActionResult<List<Utilizador>>> GetAllUtilizadores()
+    /*public async Task<ActionResult<List<Utilizador>>> GetAllUtilizadores()*/
+    public async Task<List<Utilizador>> GetAllUtilizadores()
     {
         return await _utilizadorService.GetAllUtilizadores();
     }

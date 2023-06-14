@@ -1,0 +1,25 @@
+@using Radzen
+@using System.Net.Http
+@using BusinessLogic.Entities
+@page "/RadzenDataGrip"
+
+<h3>RadzenDataGrip</h3>
+
+<RadzenDataGrid T="Utilizador" Data="@UtilizadorService" PageSize="10">
+    <Columns>
+        <RadzenDataGridColumn Property="Name" Title="Name" />
+        <RadzenDataGridColumn Property="Age" Title="Age" />
+        <RadzenDataGridColumn Property="Location" Title="Location" />
+    </Columns>
+</RadzenDataGrid>
+
+
+@code {
+    private List<Utilizador> utilizadors;
+
+    protected override async Task OnInitializedAsync()
+    {
+    // Fetch JSON data from the backend API
+        utilizadors = await Http.GetFromJsonAsync<List<Utilizador>>("api/");
+    }
+}

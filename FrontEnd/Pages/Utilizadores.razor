@@ -1,7 +1,49 @@
 @page "/utilizadores"
+@inject IUtilizadorService UtilizadorService
+@inject NavigationManager NavigationManager
+@using Radzen
 
 <h3>utilizadores</h3>
 
+<table class="table">
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Nome</th>
+        <th>Morada</th>
+        <th>Tipo de Utilizador</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var utilizador in UtilizadorService.Utilizadores)
+    {
+        <tr>
+            <td>@utilizador.Username</td>
+            <td>@utilizador.Email</td>
+            <td>@utilizador.Nome</td>
+            <td>@utilizador.Morada</td>
+            <td>@utilizador.TipoUtilizador</td>
+            <td>
+                <button class="btn btn-primary"
+                        @onclick="(() => ShowUtilizador(utilizador.Id))">
+                    <i class="oi oi-pencil"></i>
+                </button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
 @code {
-    
+    protected override async Task OnInitializedAsync()
+    {
+        await UtilizadorService.GetUtilizadores();
+    }
+
+    void ShowUtilizador(Guid id)
+    {
+        NavigationManager.NavigateTo($"utilizador/{id}");
+    }
 }
