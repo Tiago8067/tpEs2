@@ -11,24 +11,30 @@ namespace FrontEnd.Services.UtilizadorService;
 public class UtilizadorService : IUtilizadorService
 {
     private readonly HttpClient _http;
-    private readonly NavigationManager _navigationManager;
+    /*private readonly NavigationManager _navigationManager;*/
 
-    public UtilizadorService(HttpClient http, NavigationManager navigationManger)
+    /*public UtilizadorService(HttpClient http, NavigationManager navigationManger)
     {
         _http = http;
         _navigationManager = navigationManger;
+    }*/
+    
+    public UtilizadorService(HttpClient http)
+    {
+        _http = http;
     }
 
     public List<Utilizador> Utilizadores { get; set; } = new List<Utilizador>();
     //public Utilizador[]? Utilizadors;
     
-    public async Task GetUtilizadores()
+    public async Task<List<Utilizador>> GetUtilizadores()
     {
-        var result = await _http.GetFromJsonAsync<List<Utilizador>>("api/Utilizador");
+        return await _http.GetFromJsonAsync<List<Utilizador>>("/api/Utilizador");
+        /*var result = await _http.GetFromJsonAsync<List<Utilizador>>("api/Utilizador");
         if (result is not null)
         {
             Utilizadores = result;
-        }
+        }*/
         //return result;
 
         //Utilizadores = await _http.GetFromJsonAsync<List<Utilizador>>("api/Utilizador/GetAllUtilizadores");

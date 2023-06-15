@@ -99,19 +99,18 @@ app.UseHttpsRedirection();
 //app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
-app.UseRouting();
 //
 //app.UseCors("myAllowSpecificOrigins");
 //app.UseCors();
-
+app.UseRouting();
 // Inside the Configure method in your backend code
-app.UseCors(options =>
+/*app.UseCors(options =>
 {
     options.WithOrigins("http://localhost:5270")
         .AllowAnyHeader()
         .AllowAnyMethod()
         .AllowCredentials();
-});
+});*/
 
 app.UseAuthorization();
 
@@ -127,10 +126,10 @@ app.UseAuthorization();
     endpoints.MapRazorPages();
 });*/
 
-app.UseEndpoints(endpoints =>
+/*app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
-});
+});*/
 
 //teste frontend
 //app.MapRazorPages();

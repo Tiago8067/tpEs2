@@ -26,10 +26,10 @@
             <td>@utilizador.Morada</td>
             <td>@utilizador.TipoUtilizador</td>
             <td>
-                <button class="btn btn-primary"
+                @*<button class="btn btn-primary"
                         @onclick="(() => ShowUtilizador(utilizador.Id))">
                     <i class="oi oi-pencil"></i>
-                </button>
+                </button>*@
             </td>
         </tr>
     }
@@ -45,10 +45,10 @@
         await UtilizadorService.GetUtilizadores();
     }
 
-    void ShowUtilizador(Guid id)
+    /*void ShowUtilizador(Guid id)
     {
         NavigationManager.NavigateTo($"utilizador/{id}");
-    }
+    }*/
 }
 
 @*@page "/utilizadores"
