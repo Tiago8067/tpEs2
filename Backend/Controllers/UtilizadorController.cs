@@ -1,4 +1,5 @@
 using Backend.Services.UtilizadorService;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
@@ -15,13 +16,15 @@ public class UtilizadorController: ControllerBase
     }
     
     //("GetAllUtilizadores")
-    /*public async Task<ActionResult<List<Utilizador>>> GetAllUtilizadores()
-    {
-        var utilizadores = await _utilizadorService.GetAllUtilizadores();
-        return Ok(utilizadores);
-        //return await _utilizadorService.GetAllUtilizadores();
-    }*/
+    //[EnableCors("MyAllowSpecificOrigins")]
     [HttpGet]
+    public async Task<ActionResult<List<Utilizador>>> GetAllUtilizadores()
+    {
+        /*var utilizadores = await _utilizadorService.GetAllUtilizadores();
+        return Ok(utilizadores);*/
+        return await _utilizadorService.GetAllUtilizadores();
+    }
+    /*[HttpGet]
     public async Task<ActionResult<IEnumerable<dynamic>>> GetAllUtilizadores()
     {
         if (_utilizadorService.GetAllUtilizadores() == null)
@@ -30,7 +33,7 @@ public class UtilizadorController: ControllerBase
         }
         
         return await _utilizadorService.GetAllUtilizadores();
-    }
+    }*/
     
     [HttpGet("{id}")]
     public async Task<ActionResult<Utilizador>> GetUtilizadorById(Guid id)

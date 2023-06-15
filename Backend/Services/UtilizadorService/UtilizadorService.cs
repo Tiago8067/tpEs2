@@ -14,13 +14,14 @@ public class UtilizadorService : IUtilizadorService
         _context = context;
     }
     
-    public async Task<ActionResult<IEnumerable<dynamic>>> GetAllUtilizadores()
+    //public async Task<ActionResult<IEnumerable<dynamic>>> GetAllUtilizadores()
+    public async Task<List<Utilizador>> GetAllUtilizadores()
     {
         /*var utilizadores = await _context.Utilizadores.ToListAsync();
         return utilizadores;*/
-        //return await _context.Utilizadores.ToListAsync();
+        return await _context.Utilizadores.ToListAsync();
 
-        return await _context
+        /*return await _context
             .Utilizadores.Select(u => new
             {
                 u.Id,
@@ -49,7 +50,7 @@ public class UtilizadorService : IUtilizadorService
                         t.EstadoTarefa
                     })
                 })
-            }).ToListAsync();
+            }).ToListAsync();*/
     }
 
     public async Task<Utilizador?> GetUtilizadorById(Guid id)

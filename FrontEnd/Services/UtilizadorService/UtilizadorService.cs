@@ -20,14 +20,14 @@ public class UtilizadorService : IUtilizadorService
     }
 
     public List<Utilizador> Utilizadores { get; set; } = new List<Utilizador>();
-    public Utilizador[]? Utilizadors;
+    //public Utilizador[]? Utilizadors;
     
     public async Task GetUtilizadores()
     {
-        var result = await _http.GetFromJsonAsync<Utilizador[]>("api/Utilizador");
+        var result = await _http.GetFromJsonAsync<List<Utilizador>>("api/Utilizador");
         if (result is not null)
         {
-            Utilizadors[] = result;
+            Utilizadores = result;
         }
         //return result;
 
