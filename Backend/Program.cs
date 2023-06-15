@@ -28,8 +28,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options=>
 {
     options.AddPolicy("myAllowSpecificOrigins",
-        policy=>{
-            policy. WithOrigins ("http://localhost:5070" )
+        policy=>
+        {
+            policy.WithOrigins("http://localhost:5070")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
@@ -100,8 +101,17 @@ app.UseStaticFiles();
 
 app.UseRouting();
 //
-app.UseCors("myAllowSpecificOrigins");
+//app.UseCors("myAllowSpecificOrigins");
 //app.UseCors();
+
+// Inside the Configure method in your backend code
+app.UseCors(options =>
+{
+    options.WithOrigins("http://localhost:5270")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+});
 
 app.UseAuthorization();
 
@@ -116,6 +126,11 @@ app.UseAuthorization();
 
     endpoints.MapRazorPages();
 });*/
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 //teste frontend
 //app.MapRazorPages();
