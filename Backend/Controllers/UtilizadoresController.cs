@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using System.Net.Http;
+using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BusinessLogic.Context;
@@ -10,6 +13,7 @@ using BusinessLogic.Entities;
 
 namespace Backend.Controllers
 {
+    //[RoutePrefix("api/utilizador")]
     [Route("api/[controller]")]
     [ApiController]
     public class UtilizadoresController : ControllerBase
@@ -21,7 +25,7 @@ namespace Backend.Controllers
             _context = context;
         }
 
-        // GET: api/Utilizadores
+        /*// GET: api/Utilizadores
         [HttpGet]
         public async Task<ActionResult<IEnumerable<dynamic>>> GetUtilizadores()
         {
@@ -44,17 +48,77 @@ namespace Backend.Controllers
                     u.Morada,
                     u.TipoUtilizador,
                     u.EstadoUtilizador,
-                    u.Projetos
-                    //Como ir buscar dados associados
-                    //Books = u.Books.Select(b => new
-                    //{
-                    //    b.Id,
-                    //    b.Title,
-                    //    b.Status,
-                    //    b.PublicationYear
-                    //})
+                    Projetos = u.Projetos.Select(p => new
+                    {
+                        p.Id,
+                        p.Nome,
+                        p.NomeCliente,
+                        p.PrecoPorHora,
+                        Tarefas = p.Tarefas.Select(t => new
+                        {
+                            t.Id,
+                            t.CurtaDescricao,
+                            t.DataHoraInicio,
+                            t.DataHoraFim,
+                            t.EstadoTarefa
+                        })
+                    })
                 }).ToListAsync();
+        }*/
+        
+        /*[HttpGet]
+        [Route("api/utilizador")]
+        public IEnumerable<Utilizador> GetUtilizadores(TarefasProjetosDbContext tarefasProjetosDbContext)
+        {
+            try
+            {
+                // Your logic to retrieve utilizadores from the database or any other source
+                List<Utilizador> utilizadores = tarefasProjetosDbContext.Utilizadores.;
+
+                // Return the list of utilizadores
+                return utilizadores;
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions and return an appropriate error response
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+            }
+        }*/
+
+        public UtilizadoresController()
+        {
+            _context = new TarefasProjetosDbContext();
         }
+        
+        protected void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
+        [HttpGet]
+        [Route("api/utilizador")]
+        public IEnumerable<Utilizador> GetUtilizadores()
+        {
+            try
+            {
+                // Retrieve utilizadores from the database
+                List<Utilizador> utilizadores = _context.Utilizadores.ToList();
+
+                // Return the list of utilizadores
+                return utilizadores;
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions and return an appropriate error response
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+            }
+        }
+
 
         // GET: api/Utilizadores/5
         [HttpGet("{id}")]
