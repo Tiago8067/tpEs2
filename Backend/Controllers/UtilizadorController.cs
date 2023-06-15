@@ -18,7 +18,7 @@ public class UtilizadorController: ControllerBase
     //("GetAllUtilizadores")
     //[EnableCors("MyAllowSpecificOrigins")]
     [HttpGet]
-    [EnableCors("myAllowSpecificOrigins")]
+    //[EnableCors("myAllowSpecificOrigins")]
     public async Task<ActionResult<List<Utilizador>>> GetAllUtilizadores()
     {
         /*var utilizadores = await _utilizadorService.GetAllUtilizadores();

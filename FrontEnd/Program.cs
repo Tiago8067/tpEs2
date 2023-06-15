@@ -22,7 +22,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();*/
 
 
-var host = builder.Build();
+/*var host = builder.Build();
 
 // Get the HttpClient instance from the service provider
 var httpClient = host.Services.GetRequiredService<HttpClient>();
@@ -30,6 +30,6 @@ var httpClient = host.Services.GetRequiredService<HttpClient>();
 // Enable CORS by setting the 'mode' option to 'cors'
 httpClient.DefaultRequestHeaders.Add("mode", "cors");
 
-await host.RunAsync();
+await host.RunAsync();*/
 
-//await builder.Build().RunAsync();
+await builder.Build().RunAsync();

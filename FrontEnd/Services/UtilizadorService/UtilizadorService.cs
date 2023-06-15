@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 using System.Net.Http;
 using System;
+using System.Data.SqlTypes;
 using System.Threading.Tasks;
 
 namespace FrontEnd.Services.UtilizadorService;
@@ -29,12 +30,17 @@ public class UtilizadorService : IUtilizadorService
     
     public async Task<List<Utilizador>> GetUtilizadores()
     {
-        return await _http.GetFromJsonAsync<List<Utilizador>>("/api/Utilizador");
-        /*var result = await _http.GetFromJsonAsync<List<Utilizador>>("api/Utilizador");
+        //return await _http.GetFromJsonAsync<List<Utilizador>>("/api/Utilizador");
+        var result = await _http.GetFromJsonAsync<List<Utilizador>>("api/Utilizador");
         if (result is not null)
         {
             Utilizadores = result;
-        }*/
+            return Utilizadores;
+        }
+
+        //quando retorna null
+        return result;
+        //return result;
         //return result;
 
         //Utilizadores = await _http.GetFromJsonAsync<List<Utilizador>>("api/Utilizador/GetAllUtilizadores");
@@ -124,7 +130,7 @@ public class UtilizadorService : IUtilizadorService
         }*/
         /*var response = await _http.GetJsonAsync<string>();
         return JsonConvert.DeserializeObject<List<Utilizador>>(response);*/
-        
+
         /*try
         {
             // Set the expected response content type to JSON

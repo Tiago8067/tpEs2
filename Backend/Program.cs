@@ -4,28 +4,28 @@ using BusinessLogic.Context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-//var myAllowSpecificOrigins = "_myAllowSpecifcOrigins";
+var myAllowSpecificOrigins = "_myAllowSpecifcOrigins";
 
-/*builder.Services.AddCors(options=>
+builder.Services.AddCors(options=>
 {
     options.AddPolicy(name: myAllowSpecificOrigins,
         policy=>{
-            policy. WithOrigins ("http://localhost:5052" )
+            policy. WithOrigins ("http://localhost:5070" )
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
-}); */
+}); 
 
 /*builder.Services.AddCors(options=>
 {
     options.AddDefaultPolicy(
         policy=>
         {
-            policy.WithOrigins("http://localhost:5052");
+            policy.WithOrigins("http://localhost:5070");
         });
 }); */
 
-builder.Services.AddCors(options=>
+/*builder.Services.AddCors(options=>
 {
     options.AddPolicy("myAllowSpecificOrigins",
         policy=>
@@ -34,17 +34,9 @@ builder.Services.AddCors(options=>
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
-}); 
+}); */
 
 // Add services to the container.
-
-//teste frontend
-//builder.Services.AddControllersWithViews();
-//builder.Services.AddRazorPages();
-//builder.UseBlazorWebAssemblyAot();
-//
-
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -65,13 +57,8 @@ builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
 
 
 // Add default connection string for the Web API controllers
-/*builder.Services.AddDbContext<ES2DbContext>(options => 
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection"))
-);*/
 builder.Services.AddDbContext<TarefasDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
-
-//builder.Services.AddEntityFrameworkNpgsql()
 
 
 
@@ -82,25 +69,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    
-    //teste frontend
-    //app.UseWebAssemblyDebugging();
-    //
 }
-/*else
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}*/
 
 app.UseHttpsRedirection();
-//teste frontend
-//app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
-
-//
-//app.UseCors("myAllowSpecificOrigins");
+app.UseCors("myAllowSpecificOrigins");
 //app.UseCors();
 app.UseRouting();
 // Inside the Configure method in your backend code
@@ -131,12 +103,6 @@ app.UseAuthorization();
     endpoints.MapControllers();
 });*/
 
-//teste frontend
-//app.MapRazorPages();
-//
 app.MapControllers();
-//teste frontend
-//app.MapFallbackToFile("index.html");
-//
 
 app.Run();
