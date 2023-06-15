@@ -1,55 +1,150 @@
-using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Net.Http.Headers;
 using BusinessLogic.Entities;
-using Radzen;
+using Microsoft.AspNetCore.Components;
+using System.Net.Http.Json;
+using System.Net.Http;
+using System;
+using System.Threading.Tasks;
 
 namespace FrontEnd.Services.UtilizadorService;
 
 public class UtilizadorService : IUtilizadorService
 {
     private readonly HttpClient _http;
-    
-    public UtilizadorService(HttpClient httpClient)
+    private readonly NavigationManager _navigationManager;
+
+    public UtilizadorService(HttpClient http, NavigationManager navigationManger)
     {
-        _http = httpClient;
+        _http = http;
+        _navigationManager = navigationManger;
     }
-    
+
     public List<Utilizador> Utilizadores { get; set; } = new List<Utilizador>();
+    public Utilizador[]? Utilizadors;
     
     public async Task GetUtilizadores()
     {
-        //var result = await _http.GetFromJsonAsync<List<Utilizador>>("api/Utilizador/GetAllUtilizadores");
-        //var result = await _http.GetFromJsonAsync<List<Utilizador>>($"api/Utilizador/GetAllUtilizadores");
-        var result = await _http.GetStringAsync("api/Utilizador/GetAllUtilizadores");
-        Utilizadores = JsonSerializer.Deserialize<List<Utilizador>>(result);
-        /*if (result is not null)
+        var result = await _http.GetFromJsonAsync<Utilizador[]>("api/Utilizador");
+        if (result is not null)
         {
-            Utilizadores = result;
-        }*/
-        
-        /*var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true, // Handle case-insensitive property matching
-            Converters =
-            {
-                new JsonStringEnumConverter() // Handle enum serialization/deserialization
-            }
-        };
+            Utilizadors[] = result;
+        }
+        //return result;
 
-        var response = await _http.GetAsync("api/Utilizador/GetAllUtilizadores");
+        //Utilizadores = await _http.GetFromJsonAsync<List<Utilizador>>("api/Utilizador/GetAllUtilizadores");
+
+        /*var response = await _http.GetAsync("api/Utilizador/GetAllUtilizadores");
         if (response.IsSuccessStatusCode)
         {
-            var jsonString = await response.Content.ReadAsStringAsync();
-            Utilizadores = JsonSerializer.Deserialize<List<Utilizador>>(jsonString, options);
-        }
-        else
+            var json = await response.Content.ReadAsStringAsync();
+            Utilizadores = JsonSerializer.Deserialize<List<Utilizador>>(json);
+        }*/
+
+        /*try
         {
-            // Handle error case
+            var response = await _http.GetAsync("api/Utilizador/GetAllUtilizadores");
+            response.EnsureSuccessStatusCode();
+
+            var result = await response.Content.ReadFromJsonAsync<List<Utilizador>>();
+            if (result is not null)
+            {
+                Utilizadores = result;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle or log the exception
+            Console.WriteLine($"Error getting utilizadores: {ex.Message}");
+        }*/
+
+        /*try
+        {
+            var response = await _http.GetAsync("api/Utilizador/GetAllUtilizadores");
+            response.EnsureSuccessStatusCode();
+
+            var responseContent = await response.Content.ReadFromJsonAsync();
+
+            // Check if the response content starts with '<', indicating non-JSON data
+            if (responseContent.StartsWith("<"))
+            {
+                // Handle the error appropriately (e.g., display an error message)
+                Console.WriteLine("Invalid response format: HTML or XML detected.");
+                return;
+            }
+
+            var result = JsonSerializer.Deserialize<List<Utilizador>>(responseContent);
+            if (result is not null)
+            {
+                Utilizadores = result;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle or log the exception
+            Console.WriteLine($"Error getting utilizadores: {ex.Message}");
+        }*/
+
+        /*try
+        {
+            var response = await _http.GetAsync("api/Utilizador/GetAllUtilizadores");
+            response.EnsureSuccessStatusCode();
+
+            /*var responseContent = await response.Content.ReadAsStringAsync();
+
+            // Check if the response content starts with '<', indicating non-JSON data
+            if (responseContent.StartsWith("<"))
+            {
+                // Handle the error appropriately (e.g., display an error message)
+                Console.WriteLine("Invalid response format: HTML or XML detected.");
+                Utilizadores = new List<Utilizador>(); // Set an empty list
+                return;
+            }#1#
+
+            var result = await response.Content.ReadFromJsonAsync<List<Utilizador>>();
+            if (result is not null)
+            {
+                Utilizadores = result;
+            }
+            else
+            {
+                Utilizadores = new List<Utilizador>(); // Set an empty list
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle or log the exception
+            Console.WriteLine($"Error getting utilizadores: {ex.Message}");
+            Utilizadores = new List<Utilizador>(); // Set an empty list
+        }*/
+        /*var response = await _http.GetJsonAsync<string>();
+        return JsonConvert.DeserializeObject<List<Utilizador>>(response);*/
+        
+        /*try
+        {
+            // Set the expected response content type to JSON
+            _http.DefaultRequestHeaders.Accept.Clear();
+            _http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // Make the GET request
+            HttpResponseMessage response = await _http.GetAsync("api/Utilizador");
+
+            // Check if the response is successful
+            response.EnsureSuccessStatusCode();
+
+            // Read the response content as JSON
+            BusinessLogic.Entities.Utilizador jsonData = await response.Content.ReadAsAsync<BusinessLogic.Entities.Utilizador>();
+
+            return jsonData;
+        }
+        catch (Exception ex)
+        {
+            // Handle any exceptions or errors
+            Console.WriteLine("An error occurred while retrieving JSON data: " + ex.Message);
+            throw;
         }*/
     }
 
-    public Task<Utilizador?> GetUtilizadorById(int id)
+    public Task<Utilizador?> GetUtilizadorById(Guid id)
     {
         throw new NotImplementedException();
     }
@@ -59,12 +154,12 @@ public class UtilizadorService : IUtilizadorService
         throw new NotImplementedException();
     }
 
-    public Task UpdateUtilizador(int id, Utilizador utilizador)
+    public Task UpdateUtilizador(Guid id, Utilizador utilizador)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteUtilizador(int id)
+    public Task DeleteUtilizador(Guid id)
     {
         throw new NotImplementedException();
     }

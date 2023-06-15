@@ -5,9 +5,10 @@ namespace FrontEnd.Services.UtilizadorService;
 public interface IUtilizadorService
 {
     List<Utilizador> Utilizadores { get; set; }
+    /*<List<Utilizador>>*/
     Task GetUtilizadores();
-    Task<Utilizador?> GetUtilizadorById(int id);
+    Task<Utilizador?> GetUtilizadorById(Guid id);
     Task CreateUtilizador(Utilizador utilizador);
-    Task UpdateUtilizador(int id, Utilizador utilizador);
-    Task DeleteUtilizador(int id);
+    Task UpdateUtilizador(Guid id, Utilizador utilizador);
+    Task DeleteUtilizador(Guid id);
 }

@@ -14,10 +14,21 @@ public class UtilizadorController: ControllerBase
         _utilizadorService = utilizadorService;
     }
     
-    [HttpGet("GetAllUtilizadores")]
-    /*public async Task<ActionResult<List<Utilizador>>> GetAllUtilizadores()*/
-    public async Task<List<Utilizador>> GetAllUtilizadores()
+    //("GetAllUtilizadores")
+    /*public async Task<ActionResult<List<Utilizador>>> GetAllUtilizadores()
     {
+        var utilizadores = await _utilizadorService.GetAllUtilizadores();
+        return Ok(utilizadores);
+        //return await _utilizadorService.GetAllUtilizadores();
+    }*/
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<dynamic>>> GetAllUtilizadores()
+    {
+        if (_utilizadorService.GetAllUtilizadores() == null)
+        {
+            return NotFound("Nao existe");
+        }
+        
         return await _utilizadorService.GetAllUtilizadores();
     }
     

@@ -1,7 +1,7 @@
 @page "/utilizadores"
+@using BusinessLogic.Entities
 @inject IUtilizadorService UtilizadorService
 @inject NavigationManager NavigationManager
-@using Radzen
 
 <h3>utilizadores</h3>
 
@@ -37,6 +37,9 @@
 </table>
 
 @code {
+    //utilizadores = 
+    //@*@foreach (var utilizador in utilizadores)*@
+    //private Utilizador[]? utilizadores;
     protected override async Task OnInitializedAsync()
     {
         await UtilizadorService.GetUtilizadores();
@@ -47,3 +50,58 @@
         NavigationManager.NavigateTo($"utilizador/{id}");
     }
 }
+
+@*@page "/utilizadores"
+
+@using System.Threading.Tasks
+@using BusinessLogic.Entities
+@using Newtonsoft.Json
+
+<h3>utilizadores</h3>
+
+@if (errorMessage != null)
+{
+    <p>Error: @errorMessage</p>
+}
+else if (utilizadors != null)
+{
+    <RadzenDataGrid T="Person" Data="@utilizadors" PageSize="10">
+        <Columns>
+            <RadzenDataGridColumn Property="Name" Title="Name" />
+            <RadzenDataGridColumn Property="Age" Title="Age" />
+            <RadzenDataGridColumn Property="Location" Title="Location" />
+        </Columns>
+    </RadzenDataGrid>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    private List<Utilizador> utilizadors;
+    private string errorMessage;
+
+    [Inject]
+    private UtilizadorService UtilizadorService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var response = await UtilizadorService.GetUtilizadores();
+            if (response != null)
+            {
+                utilizadors = response;
+            }
+            else
+            {
+                errorMessage = "Failed to retrieve data.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+}*@

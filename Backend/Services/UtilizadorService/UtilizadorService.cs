@@ -1,4 +1,6 @@
 using BusinessLogic.Context;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services.UtilizadorService;
@@ -12,11 +14,42 @@ public class UtilizadorService : IUtilizadorService
         _context = context;
     }
     
-    public async Task<List<Utilizador>> GetAllUtilizadores()
+    public async Task<ActionResult<IEnumerable<dynamic>>> GetAllUtilizadores()
     {
         /*var utilizadores = await _context.Utilizadores.ToListAsync();
         return utilizadores;*/
-        return await _context.Utilizadores.ToListAsync();
+        //return await _context.Utilizadores.ToListAsync();
+
+        return await _context
+            .Utilizadores.Select(u => new
+            {
+                u.Id,
+                u.Email,
+                u.Username,
+                u.Password,
+                u.Nome,
+                u.Genero,
+                u.DataDeNascimento,
+                u.CodigoPostal,
+                u.Morada,
+                u.TipoUtilizador,
+                u.EstadoUtilizador,
+                Projetos = u.Projetos.Select(p => new
+                {
+                    p.Id,
+                    p.Nome,
+                    p.NomeCliente,
+                    p.PrecoPorHora,
+                    Tarefas = p.Tarefas.Select(t => new
+                    {
+                        t.Id,
+                        t.CurtaDescricao,
+                        t.DataHoraInicio,
+                        t.DataHoraFim,
+                        t.EstadoTarefa
+                    })
+                })
+            }).ToListAsync();
     }
 
     public async Task<Utilizador?> GetUtilizadorById(Guid id)

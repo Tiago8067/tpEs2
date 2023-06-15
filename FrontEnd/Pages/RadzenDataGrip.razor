@@ -1,11 +1,11 @@
-@using Radzen
+@*@using Radzen
 @using System.Net.Http
 @using BusinessLogic.Entities
 @page "/RadzenDataGrip"
 
 <h3>RadzenDataGrip</h3>
 
-<RadzenDataGrid T="Utilizador" Data="@UtilizadorService" PageSize="10">
+<RadzenDataGrid T="Utilizador" Data="" PageSize="10">
     <Columns>
         <RadzenDataGridColumn Property="Name" Title="Name" />
         <RadzenDataGridColumn Property="Age" Title="Age" />
@@ -20,6 +20,60 @@
     protected override async Task OnInitializedAsync()
     {
     // Fetch JSON data from the backend API
-        utilizadors = await Http.GetFromJsonAsync<List<Utilizador>>("api/");
+        //utilizadors = await Http.GetFromJsonAsync<List<Utilizador>>("api/");
     }
 }
+
+@page "/person-grid"
+
+@using System.Threading.Tasks
+@using Newtonsoft.Json
+
+<h3>Person Grid</h3>
+
+@if (errorMessage != null)
+{
+    <p>Error: @errorMessage</p>
+}
+else if (people != null)
+{
+    <RadzenDataGrid T="Person" Data="@people" PageSize="10">
+        <Columns>
+            <RadzenDataGridColumn Property="Name" Title="Name" />
+            <RadzenDataGridColumn Property="Age" Title="Age" />
+            <RadzenDataGridColumn Property="Location" Title="Location" />
+        </Columns>
+    </RadzenDataGrid>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    private List<Person> people;
+    private string errorMessage;
+
+    [Inject]
+    private PersonService personService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var response = await personService.GetPeople();
+            if (response != null)
+            {
+                people = response;
+            }
+            else
+            {
+                errorMessage = "Failed to retrieve data.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+}*@
