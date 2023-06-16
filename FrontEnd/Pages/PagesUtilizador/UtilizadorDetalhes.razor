@@ -13,18 +13,18 @@ else
 }
 
 <div class="row">
-    <EditForm Model="@utilizador" OnValidSubmit="@HandleValidResquest" OnInvalidSubmit="@HandleFailedResquest">
+    <EditForm Model="@Utilizador" OnValidSubmit="@HandleValidResquest" OnInvalidSubmit="@HandleFailedResquest">
         <div class="form-group">
             <label class="col-md-3">Email</label>
-            <InputText class="col-md-8 form-control" @bind-Value="@utilizador.Email"></InputText>
+            <InputText class="col-md-8 form-control" @bind-Value="@Utilizador.Email"></InputText>
         </div>
         <div class="form-group">
             <label class="col-md-3">Username</label>
-            <InputText class="col-md-8 form-control" @bind-Value="@utilizador.Username"></InputText>
+            <InputText class="col-md-8 form-control" @bind-Value="@Utilizador.Username"></InputText>
         </div>
         <div class="form-group">
             <label class="col-md-3">Password</label>
-            <InputText class="col-md-8 form-control" @bind-Value="@utilizador.Password"></InputText>
+            <InputText class="col-md-8 form-control" @bind-Value="@Utilizador.Password"></InputText>
         </div>
         <br />
         

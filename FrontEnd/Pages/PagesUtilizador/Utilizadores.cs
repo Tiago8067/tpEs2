@@ -2,7 +2,7 @@ using BusinessLogic.Entities;
 using FrontEnd.Services.UtilizadorService;
 using Microsoft.AspNetCore.Components;
 
-namespace FrontEnd.Pages;
+namespace FrontEnd.Pages.PagesUtilizador;
 
 public partial class Utilizadores
 {

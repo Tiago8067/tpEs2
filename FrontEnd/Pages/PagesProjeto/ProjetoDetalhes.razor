@@ -1,0 +1,45 @@
+@page "/projetodetalhes"
+@page "/projetodetalhes/{id}"
+
+@if (string.IsNullOrEmpty(Id))
+{
+    <PageTitle>Adicione um novo Projeto</PageTitle>
+    <h3>Adicione um novo Projeto</h3>
+}
+else
+{
+    <PageTitle>Atualize o Projeto</PageTitle>
+    <h3>Atualize o Projeto</h3>
+}
+
+<div class="row">
+    <EditForm Model="@Projeto" OnValidSubmit="@HandleValidResquest" OnInvalidSubmit="@HandleFailedResquest">
+        <div class="form-group">
+            <label class="col-md-3">Nome Do Projeto</label>
+            <InputText class="col-md-8 form-control" @bind-Value="@Projeto.Nome"></InputText>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3">Nome Do Cliente</label>
+            <InputText class="col-md-8 form-control" @bind-Value="@Projeto.NomeCliente"></InputText>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3">Preço por Hora</label>
+            <InputNumber type="number" min="0" step="0.01" class="col-md-8 form-control" @bind-Value="@Projeto.PrecoPorHora"></InputNumber>
+        </div>
+        <br />
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-warning">Guarda o Projeto</button>
+            <a @onclick="@GoToProjects" class="btn btn-primary">Cancelar</a>
+            
+            <br />
+            
+            @if (!string.IsNullOrEmpty(Id))
+            {
+                <a @onclick="@DeleteProjeto" class="btn btn-danger">Apagar Projeto</a>
+            }
+        </div>
+        <br />
+        <p style="color: red;">@Message</p>
+    </EditForm>
+</div>

@@ -2,12 +2,12 @@ using BusinessLogic.Entities;
 using FrontEnd.Services.UtilizadorService;
 using Microsoft.AspNetCore.Components;
 
-namespace FrontEnd.Pages;
+namespace FrontEnd.Pages.PagesUtilizador;
 
 public partial class UtilizadorDetalhes
 {
     protected string Message = string.Empty;
-    protected Utilizador utilizador { get; set; } = new Utilizador();
+    protected Utilizador Utilizador { get; set; } = new Utilizador();
     
     [Parameter]
     public string Id { get; set; }
@@ -32,7 +32,7 @@ public partial class UtilizadorDetalhes
 
             if (apiUtilizador != null)
             {
-                utilizador = apiUtilizador;
+                Utilizador = apiUtilizador;
             }
         }
     }
@@ -70,9 +70,9 @@ public partial class UtilizadorDetalhes
     {
         if (string.IsNullOrEmpty(Id))
         {
-            var result = await UtilizadorService.AddUtilizador(utilizador);
+            var result = await UtilizadorService.AddUtilizador(Utilizador);
 
-            if (result != null)
+            if (result)
             {
                 NavigationManager.NavigateTo("/utilizadores");
             }
@@ -83,7 +83,7 @@ public partial class UtilizadorDetalhes
         }
         else
         {
-            var result = await UtilizadorService.UpdateUtilizador(utilizador.Id, utilizador);
+            var result = await UtilizadorService.UpdateUtilizador(Utilizador.Id, Utilizador);
 
             if (result)
             {
