@@ -1,0 +1,34 @@
+@page "/tarefas"
+
+<PageTitle>Tarefas</PageTitle>
+
+<h3>Bem-Vindo na Página das Tarefas</h3>
+
+<a href="@($"TarefaDetalhes")" class="btn btn-success">Adicionar uma Nova Tarefa</a>
+
+<br />
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Curta Decrição</th>
+        <th>Data Hora de Início</th>
+        <th>Data Hora de Fim</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (var item in Tasks)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.CurtaDescricao</td>
+            <td>@item.DataHoraInicio</td>
+            <td>@item.DataHoraFim</td>
+            <td>
+                <a href="@($"TarefaDetalhes/{item.Id}")" class="btn btn-success">Editar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

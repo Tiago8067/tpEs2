@@ -1,0 +1,45 @@
+@page "/tarefadetalhes"
+@page "/tarefadetalhes/{id}"
+
+@if (string.IsNullOrEmpty(Id))
+{
+    <PageTitle>Adicione uma Nova Tarefa</PageTitle>
+    <h3>Adicione uma Nova Tarefa</h3>
+}
+else
+{
+    <PageTitle>Atualize a Tarefa</PageTitle>
+    <h3>Atualize a Tarefa</h3>
+}
+
+<div class="row">
+    <EditForm Model="@Task" OnValidSubmit="@HandleValidResquest" OnInvalidSubmit="@HandleFailedResquest">
+        <div class="form-group">
+            <label class="col-md-3">Curta Decrição</label>
+            <InputText class="col-md-8 form-control" @bind-Value="@Task.CurtaDescricao"></InputText>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3">Data Hora de Início</label>
+            <InputDate class="col-md-8 form-control" @bind-Value="@Task.DataHoraInicio"></InputDate>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3">Data Hora de Fim</label>
+            <InputDate class="col-md-8 form-control" @bind-Value="@Task.DataHoraFim"></InputDate>
+        </div>
+        <br />
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-warning">Guarda a Tarefa</button>
+            <a @onclick="@GoToTasks" class="btn btn-primary">Cancelar</a>
+            
+            <br />
+            
+            @if (!string.IsNullOrEmpty(Id))
+            {
+                <a @onclick="@DeleteTask" class="btn btn-danger">Apagar a Tarefa</a>
+            }
+        </div>
+        <br />
+        <p style="color: red;">@Message</p>
+    </EditForm>
+</div>
