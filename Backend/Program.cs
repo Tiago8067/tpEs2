@@ -1,4 +1,5 @@
 using Backend.Services.ProjetoService;
+using Backend.Services.TarefaService;
 using Backend.Services.UtililizadorService;
 using BusinessLogic.Context;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<TarefasDbContexta>(optionsBuilder =>
 
 builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
 builder.Services.AddScoped<IProjetoService, ProjetoService>();
+builder.Services.AddScoped<ITarefaService, TarefaService>();
 
 // Add services to the container.
 builder.Services.AddControllers();
