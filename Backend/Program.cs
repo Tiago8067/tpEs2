@@ -1,3 +1,4 @@
+using Backend.Services.ProjetoService;
 using Backend.Services.UtililizadorService;
 using BusinessLogic.Context;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<TarefasDbContexta>(optionsBuilder =>
     optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
 builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
+builder.Services.AddScoped<IProjetoService, ProjetoService>();
 
 // Add services to the container.
 builder.Services.AddControllers();
