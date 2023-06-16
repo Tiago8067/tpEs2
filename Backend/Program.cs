@@ -13,19 +13,19 @@ builder.Services.AddDbContext<TarefasDbContexta>(optionsBuilder =>
 
 builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
 
-/*// Add services to the container.
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();*/
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    /*app.UseSwagger();
-    app.UseSwaggerUI();*/
+    app.UseSwagger();
+    app.UseSwaggerUI();
     app.UseWebAssemblyDebugging();
 }
 else
@@ -47,8 +47,11 @@ app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 
-/*app.UseAuthorization();
+app.UseAuthorization();
 
-app.MapControllers();*/
+app.MapControllers();
 
 app.Run();
+
+//Endpoinmt para veririficacoes do SWAGGER
+// =>   http://localhost:5052/swagger/index.html
