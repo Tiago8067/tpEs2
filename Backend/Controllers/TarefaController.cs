@@ -60,4 +60,16 @@ public class TarefaController : ControllerBase
         }
         return Ok(result);
     }
+
+    [HttpPost("{tarefaId}/associate-projeto/{projetoId}")]
+    public async Task<ActionResult<List<Tarefa>>> AssociateTarefaProjeto(Guid tarefaId, Guid projetoId)
+    {
+        var result = await _tarefaService.AssociateTarefaProjeto(tarefaId, projetoId);
+        if (result is null)
+        {
+            return NotFound("A tarefa ou o projeto não existem"); //Esta tarefa não está associada ao projeto
+        }
+        return Ok(result);
+    }
+
 }

@@ -64,4 +64,24 @@ public class TarefaService : ITarefaService
         await _contexta.SaveChangesAsync();
         return await _contexta.Tarefas.ToListAsync();
     }
+
+    public async Task<List<Tarefa>> AssociateTarefaProjeto(Guid tarefaId, Guid projetoId)
+    {
+        var tarefa = await _contexta.Tarefas.FindAsync(tarefaId);
+        if (tarefa is null)
+        {
+            return null;
+        }
+        var projeto = await _contexta.Projetos.FindAsync(projetoId);
+        if (projeto is null)
+        {
+            return null;
+        }
+
+        tarefa.ProjetoId = projetoId;
+
+        await _contexta.SaveChangesAsync();
+
+        return await _contexta.Tarefas.ToListAsync();
+    }
 }
