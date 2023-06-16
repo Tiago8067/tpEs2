@@ -1,0 +1,45 @@
+@page "/utilizadordetalhes"
+@page "/utilizadordetalhes/{id}"
+
+@if (string.IsNullOrEmpty(Id))
+{
+    <PageTitle>Adicione um novo Utilizador</PageTitle>
+    <h3>Adicione um novo Utilizador</h3>
+}
+else
+{
+    <PageTitle>Atualize Utilizador</PageTitle>
+    <h3>Atualize Utilizador</h3>
+}
+
+<div class="row">
+    <EditForm Model="@utilizador" OnValidSubmit="@HandleValidResquest" OnInvalidSubmit="@HandleFailedResquest">
+        <div class="form-group">
+            <label class="col-md-3">Email</label>
+            <InputText class="col-md-8 form-control" @bind-Value="@utilizador.Email"></InputText>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3">Username</label>
+            <InputText class="col-md-8 form-control" @bind-Value="@utilizador.Username"></InputText>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3">Password</label>
+            <InputText class="col-md-8 form-control" @bind-Value="@utilizador.Password"></InputText>
+        </div>
+        <br />
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-warning">Guarda o Utilizador</button>
+            <a @onclick="@GoToUtilizadors" class="btn btn-primary">Cancelar</a>
+            
+            <br />
+            
+            @if (!string.IsNullOrEmpty(Id))
+            {
+                <a @onclick="@DeleteUtilizador" class="btn btn-danger">Apagar Utilizador</a>
+            }
+        </div>
+        <br />
+        <p style="color: red;">@Message</p>
+    </EditForm>
+</div>
