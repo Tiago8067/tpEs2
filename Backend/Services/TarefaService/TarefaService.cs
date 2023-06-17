@@ -65,8 +65,9 @@ public class TarefaService : ITarefaService
         return await _contexta.Tarefas.ToListAsync();
     }
 
-    public async Task<List<Tarefa>> AssociateTarefaProjeto(Guid tarefaId, Guid projetoId)
+    public async Task<List<Tarefa>> AssociateTarefaProjeto(Guid tarefaId, Guid projetoId, Tarefa request)
     {
+        Console.WriteLine("entrou no Service");
         var tarefa = await _contexta.Tarefas.FindAsync(tarefaId);
         if (tarefa is null)
         {
@@ -79,9 +80,15 @@ public class TarefaService : ITarefaService
         }
 
         tarefa.ProjetoId = projetoId;
+        //tarefa.ProjetoId = request.ProjetoId;
+        
+        //tarefa.Projeto.Nome = projeto.Nome;
+        //tarefa.Projeto.NomeCliente = projeto.NomeCliente;
+        //tarefa.Projeto.PrecoPorHora = projeto.PrecoPorHora;
 
         await _contexta.SaveChangesAsync();
 
+        Console.WriteLine("saiu");
         return await _contexta.Tarefas.ToListAsync();
     }
 }
