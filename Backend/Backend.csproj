@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
@@ -31,6 +32,19 @@
     <ItemGroup>
       <Compile Remove="Controllers\AuthorsController.cs" />
       <Compile Remove="Controllers\BooksController.cs" />
+      <Compile Remove="Validator\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Validator\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Validator\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Validator\**" />
     </ItemGroup>
 
 </Project>
