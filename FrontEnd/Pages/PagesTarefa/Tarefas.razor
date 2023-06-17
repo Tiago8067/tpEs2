@@ -35,7 +35,7 @@
                 <td>@item.Projeto?.Nome</td>
             }
             <td>
-                <a class="btn btn-success">Associar Projeto</a>
+                <a href="@($"AssociaProjeto/{item.Id}")" class="btn btn-success">Associar Projeto</a>
             </td>
             <td>
                 <a href="@($"TarefaDetalhes/{item.Id}")" class="btn btn-success">Editar Tarefa</a>

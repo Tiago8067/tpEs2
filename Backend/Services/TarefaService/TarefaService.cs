@@ -67,7 +67,6 @@ public class TarefaService : ITarefaService
 
     public async Task<List<Tarefa>> AssociateTarefaProjeto(Guid tarefaId, Guid projetoId, Tarefa request)
     {
-        Console.WriteLine("entrou no Service");
         var tarefa = await _contexta.Tarefas.FindAsync(tarefaId);
         if (tarefa is null)
         {
@@ -87,8 +86,7 @@ public class TarefaService : ITarefaService
         //tarefa.Projeto.PrecoPorHora = projeto.PrecoPorHora;
 
         await _contexta.SaveChangesAsync();
-
-        Console.WriteLine("saiu");
+        
         return await _contexta.Tarefas.ToListAsync();
     }
 }
