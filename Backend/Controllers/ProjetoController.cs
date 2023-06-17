@@ -35,8 +35,17 @@ public class ProjetoController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<List<Projeto>>> AddProjeto(Projeto projeto)
     {
-        var result = await _projetoService.AddProjeto(projeto);
-        return Ok(result);
+        try
+        {
+            var result = await _projetoService.AddProjeto(projeto);
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("entrou");
+            Console.WriteLine(e);
+            throw;
+        }
     }
     
     [HttpPut("{id}")]

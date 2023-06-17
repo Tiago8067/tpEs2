@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BusinessLogic.Entities;
+﻿namespace BusinessLogic.Entities;
 
 public partial class Projeto
 {

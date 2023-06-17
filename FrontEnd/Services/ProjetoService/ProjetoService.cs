@@ -61,6 +61,11 @@ public class ProjetoService : IProjetoService
 
             var response = await _httpClient.PostAsync("api/Projeto", itemJson);
 
+            if (response )
+            {
+                
+            }
+            
             return response.IsSuccessStatusCode;
         }
         catch (Exception e)
@@ -77,7 +82,7 @@ public class ProjetoService : IProjetoService
             var itemJson = new StringContent(JsonSerializer.Serialize(projeto), Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PutAsync($"api/Projeto/{id}", itemJson);
-
+            
             return response.IsSuccessStatusCode;
         }
         catch (Exception e)

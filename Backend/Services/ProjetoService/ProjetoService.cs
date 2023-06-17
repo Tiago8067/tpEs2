@@ -30,9 +30,17 @@ public class ProjetoService : IProjetoService
 
     public async Task<List<Projeto>> AddProjeto(Projeto projeto)
     {
-        _contexta.Projetos.Add(projeto);
-        await _contexta.SaveChangesAsync();
-        return await _contexta.Projetos.ToListAsync();
+        try
+        {
+            _contexta.Projetos.Add(projeto);
+            await _contexta.SaveChangesAsync();
+            return await _contexta.Projetos.ToListAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     public async Task<List<Projeto>?> UpdateProjeto(Guid id, Projeto request)
