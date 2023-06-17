@@ -18,7 +18,7 @@ public partial class TarefaDetalhes
     [Inject]
     private NavigationManager NavigationManager { get; set; }
 
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         if (string.IsNullOrEmpty(Id))
         {

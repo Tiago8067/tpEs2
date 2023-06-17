@@ -11,7 +11,7 @@ public partial class Tarefas
 
     public IEnumerable<Tarefa> Tasks { get; set; } = new List<Tarefa>();
 
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         var apiTasks = await TarefaService.AllTarefas();
 
