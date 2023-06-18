@@ -8,7 +8,9 @@
 
     <ItemGroup>
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.5" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
           <PrivateAssets>all</PrivateAssets>
@@ -33,18 +35,22 @@
       <Compile Remove="Controllers\AuthorsController.cs" />
       <Compile Remove="Controllers\BooksController.cs" />
       <Compile Remove="Validator\**" />
+      <Compile Remove="Data\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="Validator\**" />
+      <EmbeddedResource Remove="Data\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="Validator\**" />
+      <Content Remove="Data\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Validator\**" />
+      <None Remove="Data\**" />
     </ItemGroup>
 
 </Project>
