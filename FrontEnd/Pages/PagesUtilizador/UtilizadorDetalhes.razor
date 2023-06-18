@@ -16,15 +16,15 @@ else
     <EditForm Model="@Utilizador" OnValidSubmit="@HandleValidResquest" OnInvalidSubmit="@HandleFailedResquest">
         <div class="form-group">
             <label class="col-md-3">Email</label>
-            <InputText class="col-md-8 form-control" @bind-Value="@Utilizador.Email"></InputText>
+            <InputText type="email" class="col-md-8 form-control" @bind-Value="@Utilizador.Email" required ></InputText>
         </div>
         <div class="form-group">
             <label class="col-md-3">Username</label>
-            <InputText class="col-md-8 form-control" @bind-Value="@Utilizador.Username"></InputText>
+            <InputText type="text" class="col-md-8 form-control" @bind-Value="@Utilizador.Username" required></InputText>
         </div>
         <div class="form-group">
             <label class="col-md-3">Password</label>
-            <InputText class="col-md-8 form-control" @bind-Value="@Utilizador.Password"></InputText>
+            <InputText type="password" class="col-md-8 form-control" @bind-Value="@Utilizador.Password" required></InputText>
         </div>
         <br />
         
