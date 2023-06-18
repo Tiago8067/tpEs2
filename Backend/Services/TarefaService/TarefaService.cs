@@ -65,21 +65,25 @@ public class TarefaService : ITarefaService
         return await _contexta.Tarefas.ToListAsync();
     }
 
-    public async Task<List<Tarefa>> AssociateTarefaProjeto(Guid tarefaId, Guid projetoId, Tarefa request)
+    public async Task<List<Tarefa>> AssociateTarefaProjeto(Guid tarefaId, String nomeProj)
     {
         var tarefa = await _contexta.Tarefas.FindAsync(tarefaId);
         if (tarefa is null)
         {
             return null;
         }
-        var projeto = await _contexta.Projetos.FindAsync(projetoId);
-        //projeto.Nome
+        var projeto = await _contexta.Projetos.FindAsync(nomeProj);
         if (projeto is null)
         {
             return null;
         }
 
-        tarefa.ProjetoId = projetoId;
+        tarefa.Id = tarefaId;
+        //tarefa.Projeto.Nome = projeto.Nome;
+        tarefa.Projeto.Nome = projeto.Nome;
+        projeto.Nome = nomeProj;
+        
+        //tarefa.ProjetoId = NomeProj;
         //tarefa.ProjetoId = request.ProjetoId;
         
         //tarefa.Projeto.Nome = projeto.Nome;

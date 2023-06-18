@@ -10,5 +10,5 @@ public interface ITarefaService
     Task<List<Tarefa>?> UpdateTarefa(Guid id, Tarefa request);
     Task<List<Tarefa>?> DeleteTarefa(Guid id);
 
-    Task<List<Tarefa>> AssociateTarefaProjeto(Guid tarefaId, Guid projetoId, Tarefa request);
+    Task<List<Tarefa>> AssociateTarefaProjeto(Guid tarefaId, String NomeProj);
 }

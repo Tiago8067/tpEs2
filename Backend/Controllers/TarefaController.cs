@@ -1,6 +1,8 @@
 using Backend.Services.TarefaService;
 using BusinessLogic.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal;
 
 namespace Backend.Controllers;
 
@@ -61,15 +63,17 @@ public class TarefaController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("{tarefaId}/associate-projeto/{projetoId}")]
-    public async Task<ActionResult<List<Tarefa>>> AssociateTarefaProjeto(Guid tarefaId, Guid projetoId, Tarefa request)
+    [HttpPut("{tarefaId}/associate-projeto/{nomeProj}")]
+    public async Task<ActionResult<List<Tarefa>>> AssociateTarefaProjeto(Guid tarefaId, String nomeProj)
     {
         Console.WriteLine("entrou");
-        var result = await _tarefaService.AssociateTarefaProjeto(tarefaId, projetoId, request);
+        var result = await _tarefaService.AssociateTarefaProjeto(tarefaId, nomeProj);
         if (result is null)
         {
             return NotFound("A tarefa ou o projeto não existem");
         }
+        
+        SqlCommand cmd = new SqlCommand("UPDATE projetos p SET nome = nomeProj FROM tarefas t WHERE  p.id = t.projeto_id;");
         Console.WriteLine("saiu controller");
         return Ok(result);
     }

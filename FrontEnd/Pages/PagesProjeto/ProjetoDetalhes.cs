@@ -1,3 +1,4 @@
+using System.Net;
 using BusinessLogic.Entities;
 using FrontEnd.Services.ProjetoService;
 using Microsoft.AspNetCore.Components;
@@ -93,6 +94,11 @@ public partial class ProjetoDetalhes
             {
                 Message = "Algo correu mal, o projeto nao foi atulizado";
             }
+        }
+        
+        if (HttpStatusCode.BadRequest != (HttpStatusCode)0 || HttpStatusCode.InternalServerError != (HttpStatusCode)0) //Encontrar o 200
+        {
+            Message = "O Nome Projeto já existe! Insira outro.";
         }
     }
 }
