@@ -3,6 +3,7 @@ using Backend.Services.ProjetoService;
 using Backend.Services.TarefaService;
 using Backend.Services.UtililizadorService;
 using BusinessLogic.Context;
+using BusinessLogic.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<TarefasDbContexta>(optionsBuilder =>
     optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<TarefasDbContexta>();
+//builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<TarefasDbContexta>();
+
+builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
+    optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
 builder.Services.AddScoped<IProjetoService, ProjetoService>();

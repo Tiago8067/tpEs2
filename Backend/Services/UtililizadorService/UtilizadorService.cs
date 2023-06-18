@@ -46,13 +46,6 @@ public class UtilizadorService : IUtilizadorService
         utilizador.Email = request.Email;
         utilizador.Username = request.Username;
         utilizador.Password = request.Password;
-        utilizador.Nome = request.Nome;
-        utilizador.Genero = request.Genero;
-        utilizador.DataDeNascimento = request.DataDeNascimento;
-        utilizador.CodigoPostal = request.CodigoPostal;
-        utilizador.Morada = request.Morada;
-        utilizador.TipoUtilizador = request.TipoUtilizador;
-        utilizador.EstadoUtilizador = request.EstadoUtilizador;
 
         await _contexta.SaveChangesAsync();
         

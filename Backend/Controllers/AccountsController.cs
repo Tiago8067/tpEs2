@@ -1,4 +1,4 @@
-using BusinessLogic.Entities;
+/*using BusinessLogic.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,4 +27,4 @@ public class AccountsController : ControllerBase
         }
         return Ok(new Registerresult {Successful = true });
     }
-}
+}*/
