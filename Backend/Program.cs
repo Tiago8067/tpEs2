@@ -4,6 +4,7 @@ using Backend.Services.TarefaService;
 using Backend.Services.UtililizadorService;
 using BusinessLogic.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -16,9 +17,23 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<TarefasDbContexta>(optionsBuilder =>
     optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<TarefasDbContexta>();
+
 builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
 builder.Services.AddScoped<IProjetoService, ProjetoService>();
 builder.Services.AddScoped<ITarefaService, TarefaService>();
+/*builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true, //aplicado á validação do emissor para validar o token
+        ValidateAudience = true, //verifica se o token está autorizado a ser recebido pelo público válido
+        ValidateLifetime = true, //valida se o token expirou
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT: key"])) //valida a assinatura do token
+    };
+});*/
 
 // Add services to the container.
 builder.Services.AddControllers();
