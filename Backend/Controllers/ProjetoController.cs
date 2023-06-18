@@ -44,6 +44,7 @@ public class ProjetoController : ControllerBase
         {
             Console.WriteLine("entrou");
             Console.WriteLine(e);
+            //return BadRequest();
             throw;
         }
     }
