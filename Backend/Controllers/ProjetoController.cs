@@ -42,8 +42,8 @@ public class ProjetoController : ControllerBase
         }
         catch (Exception e)
         {
-            Console.WriteLine("entrou");
-            Console.WriteLine(e);
+            //Console.WriteLine(e);
+            return BadRequest("Nome do projeto repetido");
             //return BadRequest();
             throw;
         }

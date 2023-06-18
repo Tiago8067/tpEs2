@@ -27,6 +27,8 @@ public partial class AssociaProjeto
     
     public IEnumerable<Projeto>? Projects { get; set; } = new List<Projeto>();
 
+    private string nomeProjSelecionado; //guardamos o nome selecionado do dropdown
+
     protected override async Task OnInitializedAsync()
     {
         Tarefas = await TarefaService.AllTarefas();
@@ -72,5 +74,44 @@ public partial class AssociaProjeto
         {
             Message = "Algo correu mal, a tarefa nao foi associada a projeto";
         }
+    }
+
+    public void AssociaNomeProjetoTarefa()
+    {
+        if (!string.IsNullOrEmpty(nomeProjSelecionado))
+        {
+            Task.Projeto = new Projeto { Nome = nomeProjSelecionado };
+            
+            //TODO
+            try
+            {
+                var result = TarefaService.UpdateTarefa(Task.Id, Task);
+                if (result != null)
+                {
+                    Message = "Tarefa associada a Projeto com sucesso.";
+                    NavigationManager.NavigateTo("/tarefas");
+                }
+                else
+                {
+                    Message = "Falhou associação da Tarefa com Projeto";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+                //Message = "An error occurred: " + ex.Message;
+            }
+            
+        }
+        else
+        {
+            Message = "Por favor, selecione o projeto!";
+        }
+    }
+
+    public void onValueChangeProject(ChangeEventArgs<string, Projeto> args)
+    {
+        nomeProjSelecionado = args.ItemData?.Nome;
     }
 }

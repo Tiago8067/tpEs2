@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using BusinessLogic.Entities;
@@ -58,15 +59,21 @@ public class ProjetoService : IProjetoService
         try
         {
             var itemJson = new StringContent(JsonSerializer.Serialize(projeto), Encoding.UTF8, "application/json");
-
             var response = await _httpClient.PostAsync("api/Projeto", itemJson);
+            
+            /*if (!response.IsSuccessStatusCode)
+            {
+                return response.StatusCode == HttpStatusCode.BadRequest;
+            }*/
 
             return response.IsSuccessStatusCode;
         }
         catch (Exception e)
         {
             Console.WriteLine($"Erro: {e.Message}");
+            //return HttpStatusCode.BadRequest;
             throw;
+            //throw;
         }
     }
 
