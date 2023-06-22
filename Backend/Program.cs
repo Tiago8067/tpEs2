@@ -11,8 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
 
 // Add default connection string for the Web API controllers
 builder.Services.AddDbContext<TarefasDbContexta>(optionsBuilder =>
