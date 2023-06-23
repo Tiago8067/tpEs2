@@ -1,4 +1,6 @@
-﻿using BusinessLogic.Entities;
+﻿using System;
+using System.Collections.Generic;
+using BusinessLogic.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Context;
@@ -18,6 +20,8 @@ public partial class TarefasDbContexta : DbContext
 
     public virtual DbSet<Loginresult> Loginresults { get; set; }
 
+    public virtual DbSet<Product> Products { get; set; }
+
     public virtual DbSet<Projeto> Projetos { get; set; }
 
     public virtual DbSet<Registermodel> Registermodels { get; set; }
@@ -32,11 +36,10 @@ public partial class TarefasDbContexta : DbContext
 
     public virtual DbSet<Userrolemodel> Userrolemodels { get; set; }
 
-    public virtual DbSet<Utilizador> Utilizadores { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Database=es2;Username=es2;Password=es2;SearchPath=public;Port=15432");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseNpgsql(
+            "Host=localhost;Database=es2;Username=es2;Password=es2;SearchPath=public;Port=15432");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -73,6 +76,67 @@ public partial class TarefasDbContexta : DbContext
                 .HasMaxLength(500)
                 .HasColumnName("token");
         });
+
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("product");
+
+            entity.Property(e => e.Description)
+                .HasMaxLength(250)
+                .HasColumnName("description");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Imgurl)
+                .HasMaxLength(250)
+                .HasColumnName("imgurl");
+            entity.Property(e => e.Price).HasColumnName("price");
+            entity.Property(e => e.Title)
+                .HasMaxLength(250)
+                .HasColumnName("title");
+        });
+
+        /*modelBuilder.Entity<Product>().HasData(
+            new Product
+            {
+                Id = 1,
+                Title = "The Hitchhiker's Guide to the Galaxy",
+                Description =
+                    "The Hitchhiker's Guide to the Galaxy[note 1] (sometimes referred to as HG2G,[1] HHGTTG,[2] H2G2,[3] or tHGttG) is a comedy science",
+                Imgurl = "https://upload.wikimedia.org/wikipedia/en/b/bd/H2G2_UK_front_cover.jpg",
+                Price = 9.99m
+            }, new Product
+            {
+                Id = 2,
+                Title = "Ready Player One",
+                Description =
+                    "Ready Player One is a 2011 science fiction novel, and the debut novel of American author Ernest Cline. ",
+                Imgurl = "https://upload.wikimedia.org/wikipedia/en/a/a4/Ready_Player_One_cover.jpg",
+                Price = 7.99m
+            }, new Product
+            {
+                Id = 3,
+                Title = "Nineteen Eighty-Four",
+                Description =
+                    "Nineteen Eighty-Four (also stylised as 1984) is a dystopian social science fiction novel",
+                Imgurl = "https://upload.wikimedia.org/wikipedia/commons/c/c3/1984first.jpg",
+                Price = 6.99m
+            }, new Product
+            {
+                Id = 4,
+                Title = "The Matrix",
+                Description = "The Matrix is a 1999 science fiction action film written and directed by the Wachowskis",
+                Imgurl = "https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg",
+                Price = 11.99m
+            }, new Product
+            {
+                Id = 5,
+                Title = "Back to the Future",
+                Description = "Back to the Future is a 1985 American science fiction film directed by Robert Zemeckis.",
+                Imgurl = "https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg",
+                Price = 8.99m
+            }
+        );*/
 
         modelBuilder.Entity<Projeto>(entity =>
         {
@@ -197,26 +261,6 @@ public partial class TarefasDbContexta : DbContext
                 .HasColumnName("userid");
             entity.Property(e => e.Username)
                 .HasMaxLength(250)
-                .HasColumnName("username");
-        });
-
-        modelBuilder.Entity<Utilizador>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("utilizadores_pkey");
-
-            entity.ToTable("utilizadores");
-
-            entity.Property(e => e.Id)
-                .HasDefaultValueSql("uuid_generate_v4()")
-                .HasColumnName("id");
-            entity.Property(e => e.Email)
-                .HasMaxLength(250)
-                .HasColumnName("email");
-            entity.Property(e => e.Password)
-                .HasMaxLength(100)
-                .HasColumnName("password");
-            entity.Property(e => e.Username)
-                .HasMaxLength(100)
                 .HasColumnName("username");
         });
 

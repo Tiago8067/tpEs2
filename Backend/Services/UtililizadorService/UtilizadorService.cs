@@ -1,4 +1,4 @@
-using BusinessLogic.Context;
+/*using BusinessLogic.Context;
 using BusinessLogic.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +15,7 @@ public class UtilizadorService : IUtilizadorService
     
     public async Task<List<Utilizador>> GetAllUtilizadores()
     {
-        return await _contexta.Utilizadores.ToListAsync();
+        return await _contexta.Utilizadors.ToListAsync();
     }
 
     public async Task<Utilizador?> GetUtilizadorById(Guid id)
@@ -63,4 +63,4 @@ public class UtilizadorService : IUtilizadorService
         await _contexta.SaveChangesAsync();
         return await _contexta.Utilizadores.ToListAsync();
     }
-}
+}*/

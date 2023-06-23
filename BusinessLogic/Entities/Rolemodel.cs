@@ -1,4 +1,7 @@
-﻿namespace BusinessLogic.Entities;
+﻿using System;
+using System.Collections.Generic;
+
+namespace BusinessLogic.Entities;
 
 public partial class Rolemodel
 {

@@ -1,4 +1,6 @@
+global using BusinessLogic.Entities;
 using System.Text;
+using Backend.Services.ProductService;
 using Backend.Services.ProjetoService;
 using Backend.Services.TarefaService;
 using Backend.Services.UtililizadorService;
@@ -18,6 +20,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TarefasDbContexta>(optionsBuilder =>
     optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
+/*builder.Configuration.AddJsonFile("appsettings.json");*/
+
 //builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<TarefasDbContexta>();
 
 builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
@@ -25,9 +29,10 @@ builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
 
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 
-builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
+//builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
 builder.Services.AddScoped<IProjetoService, ProjetoService>();
 builder.Services.AddScoped<ITarefaService, TarefaService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 /*builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters()
@@ -91,8 +96,6 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
-
-app.MapControllers();
 
 app.Run();
 
