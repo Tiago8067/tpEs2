@@ -21,10 +21,12 @@ public class ProductService : IProductService
         return response;
     }
 
-    public async Task<ServiceResponse<Product>> GetProductAsync(int productId)
+    //public async Task<ServiceResponse<Product>> GetProductAsync(int productId)
+    public ServiceResponse<Product> GetProductAsync(int productId)
     {
         var response = new ServiceResponse<Product>();
-        var product = await _contexta.Products.FindAsync(productId);
+        //var product = await _contexta.Products.FindAsync(productId);
+        var product = _contexta.Products.FirstOrDefault(p => p.Id == productId);
 
         if (product == null)
         {

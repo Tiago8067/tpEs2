@@ -22,9 +22,11 @@ public class ProductController : ControllerBase
     }
     
     [HttpGet("{productId}")]
-    public async Task<ActionResult<ServiceResponse<Product>>> GetProduct(int productId)
+    public ActionResult<ServiceResponse<Product>> GetProduct(int productId)
+    //public async Task<ActionResult<ServiceResponse<Product>>> GetProduct(int productId)
     {
-        var result = await _productService.GetProductAsync(productId);
+        //var result = await _productService.GetProductAsync(productId);
+        var result = _productService.GetProductAsync(productId);
         return Ok(result);
     }
 
