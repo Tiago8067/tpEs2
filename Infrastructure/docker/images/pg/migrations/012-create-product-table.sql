@@ -4,5 +4,6 @@ CREATE TABLE Product
     Title  VARCHAR(250),
     Description  VARCHAR(250),
     ImgUrl  VARCHAR(250),
-    Price  decimal
+    Price  decimal,
+    category_Id int REFERENCES Category (Id)
 )
