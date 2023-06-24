@@ -22,6 +22,8 @@ public partial class TarefasDbContext : DbContext
 
     public virtual DbSet<Tarefa> Tarefas { get; set; }
 
+    public virtual DbSet<Userchangepassword> Userchangepasswords { get; set; }
+
     public virtual DbSet<Userlogin> Userlogins { get; set; }
 
     public virtual DbSet<Usermodel> Usermodels { get; set; }
@@ -107,6 +109,20 @@ public partial class TarefasDbContext : DbContext
             entity.HasOne(d => d.Projeto).WithMany(p => p.Tarefas)
                 .HasForeignKey(d => d.ProjetoId)
                 .HasConstraintName("tarefas_projeto_id_fkey");
+        });
+
+        modelBuilder.Entity<Userchangepassword>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("userchangepassword");
+
+            entity.Property(e => e.Confirmpass)
+                .HasMaxLength(250)
+                .HasColumnName("confirmpass");
+            entity.Property(e => e.Pass)
+                .HasMaxLength(250)
+                .HasColumnName("pass");
         });
 
         modelBuilder.Entity<Userlogin>(entity =>

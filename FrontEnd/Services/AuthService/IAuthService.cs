@@ -4,4 +4,5 @@ public interface IAuthService
 {
     Task<ServiceResponse<Guid>> Registo(Userregisto request);
     Task<ServiceResponse<string>> Login(Userlogin request);
+    Task<ServiceResponse<bool>> ChangePassword(Userchangepassword request);
 }

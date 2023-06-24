@@ -120,5 +120,28 @@ public class AuthService : IAuthService
         return jwt;
     }
     
+    public async Task<ServiceResponse<bool>> ChangePassword(Guid userId, string newPassword)
+    {
+        var user = await _dbContext.Usermodels.FindAsync(userId);
+        
+        if (user == null)
+        {
+            return new ServiceResponse<bool>
+            {
+                Success = false,
+                Message = "Utilizador não encontrado."
+            };
+        }
+
+        CreatePassHash(newPassword, out byte[] passwordHash, out byte[] passwordSalt);
+
+        user.Passhash = passwordHash;
+        user.Passsalt = passwordSalt;
+
+        await _dbContext.SaveChangesAsync();
+
+        return new ServiceResponse<bool> { Data = true, Message = "A pass foi alterada." };
+    }
+    
     
 }
