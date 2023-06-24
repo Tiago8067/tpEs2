@@ -30,4 +30,16 @@ public class AuthController : ControllerBase
 
         return Ok(response);
     }
+    
+    [HttpPost("login")]
+    public async Task<ActionResult<ServiceResponse<string>>> Login(Userlogin request)
+    {
+        var response = await _authService.Login(request.Email, request.Pass);
+        if (!response.Success)
+        {
+            return BadRequest(response);
+        }
+
+        return Ok(response);
+    }
 }

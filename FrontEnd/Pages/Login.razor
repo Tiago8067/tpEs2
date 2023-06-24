@@ -1,0 +1,23 @@
+@page "/login"
+
+<PageTitle>Login</PageTitle>
+
+<h3>Login</h3>
+
+<EditForm Model="user" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator />
+    <div class="mb-3">
+        <label for="email">Email</label>
+        <InputText id="email" @bind-Value="user.Email" class="form-control" />
+        <ValidationMessage For="@(() => user.Email)" />
+    </div>
+    <div class="mb-3">
+        <label for="password">Password</label>
+        <InputText id="password" @bind-Value="user.Pass" class="form-control" type="password" />
+        <ValidationMessage For="@(() => user.Pass)" />
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</EditForm>
+<div class="text-danger">
+    <span>@errorMessage</span>
+</div>
