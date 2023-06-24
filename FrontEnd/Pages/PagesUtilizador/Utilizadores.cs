@@ -1,4 +1,3 @@
-using BusinessLogic.Entities;
 using FrontEnd.Services.UtilizadorService;
 using Microsoft.AspNetCore.Components;
 
@@ -9,7 +8,7 @@ public partial class Utilizadores
    [Inject]
    private IUtilizadorService UtilizadorService { get; set; }
 
-   public IEnumerable<Utilizador> Utilizadors { get; set; } = new List<Utilizador>();
+   public IEnumerable<Utilizadore> Utilizadors { get; set; } = new List<Utilizadore>();
 
    protected async override Task OnInitializedAsync()
    {

@@ -20,8 +20,8 @@
 
     <ItemGroup>
       <Compile Remove="wwwroot\sample-data\**" />
-      <Compile Update="Pages\Autenticacao\Login.cs">
-        <DependentUpon>Login.razor</DependentUpon>
+      <Compile Update="Pages\Registo.cs">
+        <DependentUpon>Registo.razor</DependentUpon>
       </Compile>
     </ItemGroup>
 

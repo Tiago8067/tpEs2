@@ -17,5 +17,5 @@ public partial class Projeto
 
     public virtual ICollection<Tarefa> Tarefas { get; set; } = new List<Tarefa>();
 
-    public virtual Utilizador? Utilizador { get; set; }
+    public virtual Utilizadore? Utilizador { get; set; }
 }

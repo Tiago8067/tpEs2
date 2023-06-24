@@ -1,14 +1,12 @@
-using BusinessLogic.Context;
-using BusinessLogic.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services.ProjetoService;
 
 public class ProjetoService : IProjetoService
 {
-    private readonly TarefasDbContexta _contexta;
+    private readonly TarefasDbContext _contexta;
 
-    public ProjetoService(TarefasDbContexta contexta)
+    public ProjetoService(TarefasDbContext contexta)
     {
         _contexta = contexta;
     }

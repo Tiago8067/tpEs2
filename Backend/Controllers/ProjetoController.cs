@@ -1,5 +1,4 @@
 using Backend.Services.ProjetoService;
-using BusinessLogic.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;

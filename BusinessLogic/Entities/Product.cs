@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic.Entities;
 
@@ -12,6 +13,5 @@ public partial class Product
 
     public string? Imgurl { get; set; }
 
-    [Column(TypeName = "decimal(18,2)")]
     public decimal? Price { get; set; }
 }

@@ -1,5 +1,4 @@
 using Backend.Services.TarefaService;
-using BusinessLogic.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal;

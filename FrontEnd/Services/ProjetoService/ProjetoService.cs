@@ -1,7 +1,6 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using BusinessLogic.Entities;
 
 namespace FrontEnd.Services.ProjetoService;
 

@@ -1,5 +1,3 @@
-using BusinessLogic.Entities;
-
 namespace Backend.Services.TarefaService;
 
 public interface ITarefaService

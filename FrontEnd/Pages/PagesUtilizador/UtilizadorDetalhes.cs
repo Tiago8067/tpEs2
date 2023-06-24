@@ -1,4 +1,3 @@
-using BusinessLogic.Entities;
 using FrontEnd.Services.UtilizadorService;
 using Microsoft.AspNetCore.Components;
 
@@ -7,7 +6,7 @@ namespace FrontEnd.Pages.PagesUtilizador;
 public partial class UtilizadorDetalhes
 {
     protected string Message = string.Empty;
-    protected Utilizador Utilizador { get; set; } = new Utilizador();
+    protected Utilizadore Utilizador { get; set; } = new Utilizadore();
     
     [Parameter]
     public string Id { get; set; }

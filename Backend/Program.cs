@@ -1,11 +1,11 @@
 global using BusinessLogic.Entities;
+global using BusinessLogic.Context;
+global using Backend.Services.ProductService;
+global using Backend.Services.ProjetoService;
+global using Backend.Services.TarefaService;
+global using Backend.Services.UtililizadorService;
+global using Backend.Services.AuthService;
 using System.Text;
-using Backend.Services.ProductService;
-using Backend.Services.ProjetoService;
-using Backend.Services.TarefaService;
-using Backend.Services.UtililizadorService;
-using BusinessLogic.Context;
-using BusinessLogic.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,22 +17,18 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddControllersWithViews();
 
 // Add default connection string for the Web API controllers
-builder.Services.AddDbContext<TarefasDbContexta>(optionsBuilder =>
+builder.Services.AddDbContext<TarefasDbContext>(optionsBuilder =>
     optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
 /*builder.Configuration.AddJsonFile("appsettings.json");*/
 
 //builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<TarefasDbContexta>();
 
-builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
-    optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
-
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
-
-//builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
+builder.Services.AddScoped<IUtilizadorService, UtilizadorService>();
 builder.Services.AddScoped<IProjetoService, ProjetoService>();
 builder.Services.AddScoped<ITarefaService, TarefaService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 /*builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters()

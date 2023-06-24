@@ -1,4 +1,4 @@
-/*using BusinessLogic.Context;
+using BusinessLogic.Context;
 using BusinessLogic.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,19 +6,19 @@ namespace Backend.Services.UtililizadorService;
 
 public class UtilizadorService : IUtilizadorService
 {
-    private readonly TarefasDbContexta _contexta;
+    private readonly TarefasDbContext _contexta;
 
-    public UtilizadorService(TarefasDbContexta contexta)
+    public UtilizadorService(TarefasDbContext contexta)
     {
         _contexta = contexta;
     }
     
-    public async Task<List<Utilizador>> GetAllUtilizadores()
+    public async Task<List<Utilizadore>> GetAllUtilizadores()
     {
-        return await _contexta.Utilizadors.ToListAsync();
+        return await _contexta.Utilizadores.ToListAsync();
     }
 
-    public async Task<Utilizador?> GetUtilizadorById(Guid id)
+    public async Task<Utilizadore?> GetUtilizadorById(Guid id)
     {
         var utilizador = await _contexta.Utilizadores.FindAsync(id);
         if (utilizador is null)
@@ -28,14 +28,14 @@ public class UtilizadorService : IUtilizadorService
         return utilizador;
     }
 
-    public async Task<List<Utilizador>> AddUtilizador(Utilizador utilizador)
+    public async Task<List<Utilizadore>> AddUtilizador(Utilizadore utilizador)
     {
         _contexta.Utilizadores.Add(utilizador);
         await _contexta.SaveChangesAsync();
         return await _contexta.Utilizadores.ToListAsync();
     }
 
-    public async Task<List<Utilizador>?> UpdateUtilizador(Guid id, Utilizador request)
+    public async Task<List<Utilizadore>?> UpdateUtilizador(Guid id, Utilizadore request)
     {
         var utilizador = await _contexta.Utilizadores.FindAsync(id);
         if (utilizador is null)
@@ -52,7 +52,7 @@ public class UtilizadorService : IUtilizadorService
         return await _contexta.Utilizadores.ToListAsync();
     }
 
-    public async Task<List<Utilizador>?> DeleteUtilizador(Guid id)
+    public async Task<List<Utilizadore>?> DeleteUtilizador(Guid id)
     {
         var utilizador = await _contexta.Utilizadores.FindAsync(id);
         if (utilizador is null)
@@ -63,4 +63,4 @@ public class UtilizadorService : IUtilizadorService
         await _contexta.SaveChangesAsync();
         return await _contexta.Utilizadores.ToListAsync();
     }
-}*/
+}

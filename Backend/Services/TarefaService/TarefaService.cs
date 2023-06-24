@@ -1,14 +1,12 @@
-using BusinessLogic.Context;
-using BusinessLogic.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services.TarefaService;
 
 public class TarefaService : ITarefaService
 {
-    private readonly TarefasDbContexta _contexta;
+    private readonly TarefasDbContext _contexta;
 
-    public TarefaService(TarefasDbContexta contexta)
+    public TarefaService(TarefasDbContext contexta)
     {
         _contexta = contexta;
     }

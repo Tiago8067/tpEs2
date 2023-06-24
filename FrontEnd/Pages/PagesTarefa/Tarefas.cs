@@ -1,4 +1,3 @@
-using BusinessLogic.Entities;
 using FrontEnd.Services.TarefaService;
 using Microsoft.AspNetCore.Components;
 

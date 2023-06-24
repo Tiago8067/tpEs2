@@ -1,15 +1,14 @@
- using BusinessLogic.Context;
- using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services.ProductService;
 
 public class ProductService : IProductService
 {
-    private readonly TarefasDbContexta _contexta;
+    private readonly TarefasDbContext _contexta;
 
-    public ProductService(TarefasDbContexta dbContexta)
+    public ProductService(TarefasDbContext dbContexta)
     {
-        _contexta = dbContexta ?? throw new ArgumentNullException(nameof(dbContexta));
+        _contexta = dbContexta; // ?? throw new ArgumentNullException(nameof(dbContexta));
     }
     
     public async Task<ServiceResponse<List<Product>>> GetProductsAsync()

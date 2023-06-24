@@ -1,6 +1,9 @@
+﻿using System;
+using System.Collections.Generic;
+
 namespace BusinessLogic.Entities;
 
-public partial class Utilizador
+public partial class Utilizadore
 {
     public Guid Id { get; set; }
 

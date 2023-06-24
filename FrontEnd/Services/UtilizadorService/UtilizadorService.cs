@@ -1,6 +1,5 @@
 using System.Text;
 using System.Text.Json;
-using BusinessLogic.Entities;
 
 namespace FrontEnd.Services.UtilizadorService;
 
@@ -13,13 +12,13 @@ public class UtilizadorService : IUtilizadorService
         _httpClient = httpClient;
     }
 
-    public async Task<IEnumerable<Utilizador>?> All()
+    public async Task<IEnumerable<Utilizadore>?> All()
     {
         try
         {
             var apiResponse = await _httpClient.GetStreamAsync("api/Utilizador");
 
-            var utilizadors = await JsonSerializer.DeserializeAsync<IEnumerable<Utilizador>>(apiResponse, new JsonSerializerOptions()
+            var utilizadors = await JsonSerializer.DeserializeAsync<IEnumerable<Utilizadore>>(apiResponse, new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
             });
@@ -33,13 +32,13 @@ public class UtilizadorService : IUtilizadorService
         }
     }
 
-    public async Task<Utilizador?> GetUtilizador(Guid id)
+    public async Task<Utilizadore?> GetUtilizador(Guid id)
     {
         try
         {
             var response = await _httpClient.GetStreamAsync($"api/Utilizador/{id}");
 
-            var utilizador = await JsonSerializer.DeserializeAsync<Utilizador>(response, new JsonSerializerOptions()
+            var utilizador = await JsonSerializer.DeserializeAsync<Utilizadore>(response, new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
             });
@@ -53,7 +52,7 @@ public class UtilizadorService : IUtilizadorService
         }
     }
 
-    public async Task<bool> AddUtilizador(Utilizador utilizador)
+    public async Task<bool> AddUtilizador(Utilizadore utilizador)
     {
         try
         {
@@ -70,7 +69,7 @@ public class UtilizadorService : IUtilizadorService
         }
     }
 
-    public async Task<bool> UpdateUtilizador(Guid id, Utilizador utilizador)
+    public async Task<bool> UpdateUtilizador(Guid id, Utilizadore utilizador)
     {
         try
         {

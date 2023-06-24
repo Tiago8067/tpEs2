@@ -1,5 +1,3 @@
-using BusinessLogic.Entities;
-
 namespace Backend.Services.ProjetoService;
 
 public interface IProjetoService

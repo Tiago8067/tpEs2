@@ -1,4 +1,3 @@
-using BusinessLogic.Entities;
 using FrontEnd.Services.ProjetoService;
 using Microsoft.AspNetCore.Components;
 

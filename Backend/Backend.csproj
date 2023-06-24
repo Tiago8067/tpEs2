@@ -40,7 +40,6 @@
       <Compile Remove="Controllers\BooksController.cs" />
       <Compile Remove="Validator\**" />
       <Compile Remove="Data\**" />
-      <Compile Include="Data\AppDbContext.cs" />
     </ItemGroup>
 
     <ItemGroup>
