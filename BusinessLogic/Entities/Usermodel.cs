@@ -14,6 +14,8 @@ namespace BusinessLogic.Entities;
     public byte[]? Passsalt { get; set; }
 
     public DateTime? Datacriacao { get; set; }
+
+    public string? Role { get; set; }
 }*/
 
 public class Usermodel
@@ -25,4 +27,6 @@ public class Usermodel
     
     [Column(TypeName = "timestamp with time zone")]
     public DateTime Datacriacao { get; set; } = DateTime.UtcNow;
+
+    public string Role { get; set; } = "User";
 }

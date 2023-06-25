@@ -154,6 +154,9 @@ public partial class TarefasDbContext : DbContext
                 .HasColumnName("email");
             entity.Property(e => e.Passhash).HasColumnName("passhash");
             entity.Property(e => e.Passsalt).HasColumnName("passsalt");
+            entity.Property(e => e.Role)
+                .HasMaxLength(250)
+                .HasColumnName("role");
         });
 
         modelBuilder.Entity<Userregisto>(entity =>

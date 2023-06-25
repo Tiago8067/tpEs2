@@ -4,5 +4,7 @@ CREATE TABLE UserModel
     Email  VARCHAR(250),
     PassHash bytea,
     PassSalt bytea,
-    DataCriacao timestamp with time zone
+    DataCriacao timestamp with time zone,
+
+    Role  VARCHAR(250)
 );
