@@ -44,6 +44,12 @@
       <Compile Update="Pages\PagesTarefa\TarefasFinalizadas.cs">
         <DependentUpon>TarefasFinalizadas.razor</DependentUpon>
       </Compile>
+      <Compile Update="Pages\PagesUtilizador\UtilizadorDetalhes.cs">
+        <DependentUpon>UtilizadorDetalhes.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\PagesUtilizador\Utilizadores.cs">
+        <DependentUpon>Utilizadores.razor</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

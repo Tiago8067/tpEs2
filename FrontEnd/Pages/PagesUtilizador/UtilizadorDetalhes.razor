@@ -6,41 +6,100 @@
 {
     <PageTitle>Adicione um novo Utilizador</PageTitle>
     <h3>Adicione um novo Utilizador</h3>
+    
+    <div class="row">
+        <EditForm Model="@user" OnValidSubmit="@HandleValidResquest" OnInvalidSubmit="@HandleFailedResquest">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label for="nome" class="col-md-3">Nome</label>
+                <InputText id="nome" type="text" class="col-md-8 form-control" @bind-Value="@user.Nome" required></InputText>
+                <ValidationMessage For="@(() => user.Nome)" />
+            </div>
+            @*<div class="form-group">
+            <label class="col-md-3">Horas diárias de tranalho habitual</label>
+            <InputNumber type="number" min="0" step="0.01" class="col-md-8 form-control" @bind-Value="@user.Horasdiarias" required></InputNumber>
+        </div>*@
+            <div class="form-group">
+                <label class="col-md-3" for="email">Email</label>
+                <InputText id="email" type="email" class="col-md-8 form-control" @bind-Value="@user.Email" required></InputText>
+                <ValidationMessage For="@(() => user.Email)" />
+            </div>
+            <div class="form-group">
+                <label class="col-md-3" for="password">Password</label>
+                <InputText class="form-control" id="password" @bind-Value="user.Pass" type="password" />
+                <ValidationMessage For="@(() => user.Pass)" />
+            </div>
+            <div class="form-group">
+                <label class="col-md-3" for="confirmPassword">Confirm Password</label>
+                <InputText class="form-control" id="confirmPassword" @bind-Value="user.ConfirmPass" type="password" />
+                <ValidationMessage For="@(() => user.ConfirmPass)" />
+            </div>
+        
+            <br/>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-warning">Guarda o Utilizador</button>
+                <a @onclick="@GoToUtilizadors" class="btn btn-primary">Cancelar</a>
+
+                <br/>
+
+                @if (!string.IsNullOrEmpty(Id))
+                {
+                    <a @onclick="@DeleteUtilizador" class="btn btn-danger">Apagar Utilizador</a>
+                }
+            </div>
+            <br/>
+            <p style="color: red;">@Message</p>
+            <div class="@MessageCssClass">
+                <span>@Message</span>
+            </div>
+        </EditForm>
+    </div>
 }
 else
 {
     <PageTitle>Atualize Utilizador</PageTitle>
     <h3>Atualize Utilizador</h3>
-}
+    
+    <div class="row">
+        <EditForm Model="@Utilizador" OnValidSubmit="@HandleValidResquest" OnInvalidSubmit="@HandleFailedResquest">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label for="nome" class="col-md-3">Nome</label>
+                <InputText id="nome" type="text" class="col-md-8 form-control" @bind-Value="@Utilizador.Nome" required></InputText>
+                <ValidationMessage For="@(() => user.Nome)" />
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Horas diárias de tranalho habitual</label>
+                <InputNumber type="number" min="0" step="0.01" class="col-md-8 form-control" @bind-Value="@Utilizador.Horasdiarias" required></InputNumber>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3">Tipo de User : </label>
+                <select class="form-control" @bind="@Utilizador.Role">
+                    @foreach (var tipo in _tipoUser)
+                    {
+                        <option value="@tipo">@tipo</option>
+                    }
+                </select>
+            </div>
+            <br/>
 
-<div class="row">
-    <EditForm Model="@Utilizador" OnValidSubmit="@HandleValidResquest" OnInvalidSubmit="@HandleFailedResquest">
-        <div class="form-group">
-            <label class="col-md-3">Email</label>
-            <InputText type="email" class="col-md-8 form-control" @bind-Value="@Utilizador.Email" required ></InputText>
-        </div>
-        <div class="form-group">
-            <label class="col-md-3">Username</label>
-            <InputText type="text" class="col-md-8 form-control" @bind-Value="@Utilizador.Username" required></InputText>
-        </div>
-        <div class="form-group">
-            <label class="col-md-3">Password</label>
-            <InputText type="password" class="col-md-8 form-control" @bind-Value="@Utilizador.Password" required></InputText>
-        </div>
-        <br />
-        
-        <div class="form-group">
-            <button type="submit" class="btn btn-warning">Guarda o Utilizador</button>
-            <a @onclick="@GoToUtilizadors" class="btn btn-primary">Cancelar</a>
-            
-            <br />
-            
-            @if (!string.IsNullOrEmpty(Id))
-            {
-                <a @onclick="@DeleteUtilizador" class="btn btn-danger">Apagar Utilizador</a>
-            }
-        </div>
-        <br />
-        <p style="color: red;">@Message</p>
-    </EditForm>
-</div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-warning">Guarda o Utilizador</button>
+                <a @onclick="@GoToUtilizadors" class="btn btn-primary">Cancelar</a>
+
+                <br/>
+
+                @if (!string.IsNullOrEmpty(Id))
+                {
+                    <a @onclick="@DeleteUtilizador" class="btn btn-danger">Apagar Utilizador</a>
+                }
+            </div>
+            <br/>
+            <p style="color: red;">@Message</p>
+            <div class="@MessageCssClass">
+                <span>@Message</span>
+            </div>
+        </EditForm>
+    </div>
+}

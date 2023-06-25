@@ -8,7 +8,7 @@ public partial class Utilizadores
    [Inject]
    private IUtilizadorService UtilizadorService { get; set; }
 
-   public IEnumerable<Utilizadore> Utilizadors { get; set; } = new List<Utilizadore>();
+   public IEnumerable<Usermodel> Utilizadors { get; set; } = new List<Usermodel>();
 
    protected async override Task OnInitializedAsync()
    {

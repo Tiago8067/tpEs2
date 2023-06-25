@@ -12,13 +12,13 @@ public class UtilizadorService : IUtilizadorService
         _httpClient = httpClient;
     }
 
-    public async Task<IEnumerable<Utilizadore>?> All()
+    public async Task<IEnumerable<Usermodel>?> All()
     {
         try
         {
             var apiResponse = await _httpClient.GetStreamAsync("api/Utilizador");
 
-            var utilizadors = await JsonSerializer.DeserializeAsync<IEnumerable<Utilizadore>>(apiResponse, new JsonSerializerOptions()
+            var utilizadors = await JsonSerializer.DeserializeAsync<IEnumerable<Usermodel>>(apiResponse, new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
             });
@@ -32,13 +32,13 @@ public class UtilizadorService : IUtilizadorService
         }
     }
 
-    public async Task<Utilizadore?> GetUtilizador(Guid id)
+    public async Task<Usermodel?> GetUtilizador(Guid id)
     {
         try
         {
             var response = await _httpClient.GetStreamAsync($"api/Utilizador/{id}");
 
-            var utilizador = await JsonSerializer.DeserializeAsync<Utilizadore>(response, new JsonSerializerOptions()
+            var utilizador = await JsonSerializer.DeserializeAsync<Usermodel>(response, new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
             });
@@ -52,7 +52,7 @@ public class UtilizadorService : IUtilizadorService
         }
     }
 
-    public async Task<bool> AddUtilizador(Utilizadore utilizador)
+    /*public async Task<bool> AddUtilizador(Usermodel utilizador)
     {
         try
         {
@@ -67,9 +67,15 @@ public class UtilizadorService : IUtilizadorService
             Console.WriteLine($"Erro: {e.Message}");
             throw;
         }
+    }*/
+    
+    public async Task<ServiceResponse<Guid>> AddUtilizador(Userregisto request)
+    {
+        var result = await _httpClient.PostAsJsonAsync("api/Utilizador/AddUtilizador", request);
+        return await result.Content.ReadFromJsonAsync<ServiceResponse<Guid>>();
     }
 
-    public async Task<bool> UpdateUtilizador(Guid id, Utilizadore utilizador)
+    public async Task<bool> UpdateUtilizador(Guid id, Usermodel utilizador)
     {
         try
         {

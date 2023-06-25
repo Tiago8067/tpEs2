@@ -6,7 +6,16 @@ namespace FrontEnd.Pages.PagesUtilizador;
 public partial class UtilizadorDetalhes
 {
     protected string Message = string.Empty;
-    protected Utilizadore Utilizador { get; set; } = new Utilizadore();
+    protected string MessageCssClass = string.Empty;
+    protected Usermodel Utilizador { get; set; } = new Usermodel();
+    protected Userregisto user = new Userregisto();
+    
+    private List<string> _tipoUser = new List<string>
+    {
+        "User",
+        "UserManager",
+        "Admin"
+    };
     
     [Parameter]
     public string Id { get; set; }
@@ -69,16 +78,26 @@ public partial class UtilizadorDetalhes
     {
         if (string.IsNullOrEmpty(Id))
         {
-            var result = await UtilizadorService.AddUtilizador(Utilizador);
+            var result = await UtilizadorService.AddUtilizador(user);
 
-            if (result)
+            Message = result.Message;
+            if (result.Success)
+            {
+                MessageCssClass = "text-success";
+                NavigationManager.NavigateTo("/utilizadores");   
+            }
+            else
+            {
+                MessageCssClass = "text-danger";
+            }
+            /*if (result)
             {
                 NavigationManager.NavigateTo("/utilizadores");
             }
             else
             {
                 Message = "Algo correu mal, o utilizador nao foi adicionado";
-            }
+            }*/
         }
         else
         {
@@ -90,7 +109,7 @@ public partial class UtilizadorDetalhes
             }
             else
             {
-                Message = "Algo correu mal, o utilizador nao foi atulizado";
+                Message = "Algo correu mal, o utilizador nao foi atualizado (pode estar a Repetir algum Email)";
             }
         }
     }

@@ -15,13 +15,13 @@ public class UtilizadorController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Utilizadore>>> GetAllUtilizadores()
+    public async Task<List<Usermodel>> GetAllUtilizadores()
     {
         return await _utilizadorService.GetAllUtilizadores();
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Utilizadore>> GetUtilizadorById(Guid id)
+    public async Task<ActionResult<Usermodel>> GetUtilizadorById(Guid id)
     {
         var result = await _utilizadorService.GetUtilizadorById(id);
         if (result is null)
@@ -31,26 +31,45 @@ public class UtilizadorController : ControllerBase
         return Ok(result);
     }
     
-    [HttpPost("AddUtilizador")]
-    public async Task<ActionResult<List<Utilizadore>>> AddUtilizador(Utilizadore utilizador)
+    /*[HttpPost("AddUtilizador")]
+    public async Task<ActionResult<List<Usermodel>>> AddUtilizador(Usermodel utilizador)
     {
         var result = await _utilizadorService.AddUtilizador(utilizador);
         return Ok(result);
+    }*/
+    
+    [HttpPost("AddUtilizador")]
+    public async Task<ActionResult<ServiceResponse<int>>> AddUtilizador(Userregisto request)
+    {
+        var response = await _utilizadorService.AddUtilizador(
+            new Usermodel
+            {
+                Nome = request.Nome,
+                Email = request.Email
+            },
+            request.Pass);
+
+        if (!response.Success)
+        {
+            return BadRequest(response);
+        }
+
+        return Ok(response);
     }
     
     [HttpPut("{id}")]
-    public async Task<ActionResult<List<Utilizadore>>> UpdateUtilizador(Guid id, Utilizadore request)
+    public async Task<ActionResult<List<Usermodel>>> UpdateUtilizador(Guid id, Usermodel request)
     {
         var result = await _utilizadorService.UpdateUtilizador(id, request);
         if (result is null)
         {
-            return NotFound("Este Utilizador não Existe");
+            return NotFound("Este Utilizador não Existe, ou pode estar a Repetir o Email");
         }
         return Ok(result);
     }
     
     [HttpDelete("{id}")]
-    public async Task<ActionResult<List<Utilizadore>>> DeleteUtilizador(Guid id)
+    public async Task<ActionResult<List<Usermodel>>> DeleteUtilizador(Guid id)
     {
         var result = await _utilizadorService.DeleteUtilizador(id);
         if (result is null)
