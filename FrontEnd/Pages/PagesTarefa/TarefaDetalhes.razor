@@ -1,5 +1,6 @@
 @page "/tarefadetalhes"
 @page "/tarefadetalhes/{id}"
+@attribute [Authorize]
 
 @if (string.IsNullOrEmpty(Id))
 {

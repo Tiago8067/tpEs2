@@ -4,6 +4,8 @@ namespace BusinessLogic.Entities;
 
 /*public partial class Userregisto
 {
+    public string? Nome { get; set; }
+
     public string? Email { get; set; }
 
     public string? Pass { get; set; }
@@ -13,6 +15,8 @@ namespace BusinessLogic.Entities;
 
 public class Userregisto
 {
+    [Required, StringLength(100, MinimumLength = 4)]
+    public string Nome { get; set; } = string.Empty;
     [Required, EmailAddress]
     public string Email { get; set; } = string.Empty;
     

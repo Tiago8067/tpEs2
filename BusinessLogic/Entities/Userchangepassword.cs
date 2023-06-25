@@ -13,7 +13,7 @@ public partial class Userchangepassword
 
 public class Userchangepassword
 {
-    [Required, StringLength(100, MinimumLength = 6)]
+    [Required, StringLength(100, MinimumLength = 4)]
     public string Pass { get; set; } = string.Empty;
         
     [Compare("Pass", ErrorMessage = "As pass não coincidem.")]

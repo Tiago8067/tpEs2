@@ -21,6 +21,7 @@ public class AuthController : ControllerBase
         var response = await _authService.Registo(
             new Usermodel
             {
+                Nome = request.Nome,
                 Email = request.Email
             },
             request.Pass);

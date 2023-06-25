@@ -152,6 +152,10 @@ public partial class TarefasDbContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(250)
                 .HasColumnName("email");
+            entity.Property(e => e.Horasdiarias).HasColumnName("horasdiarias");
+            entity.Property(e => e.Nome)
+                .HasMaxLength(250)
+                .HasColumnName("nome");
             entity.Property(e => e.Passhash).HasColumnName("passhash");
             entity.Property(e => e.Passsalt).HasColumnName("passsalt");
             entity.Property(e => e.Role)
@@ -171,6 +175,9 @@ public partial class TarefasDbContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(250)
                 .HasColumnName("email");
+            entity.Property(e => e.Nome)
+                .HasMaxLength(250)
+                .HasColumnName("nome");
             entity.Property(e => e.Pass)
                 .HasMaxLength(250)
                 .HasColumnName("pass");

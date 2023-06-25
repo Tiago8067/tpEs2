@@ -7,6 +7,10 @@ namespace BusinessLogic.Entities;
 {
     public Guid Id { get; set; }
 
+    public string? Nome { get; set; }
+
+    public double? Horasdiarias { get; set; }
+
     public string? Email { get; set; }
 
     public byte[]? Passhash { get; set; }
@@ -21,6 +25,8 @@ namespace BusinessLogic.Entities;
 public class Usermodel
 {
     public Guid Id { get; set; }
+    public string Nome { get; set; } = string.Empty;
+    public double Horasdiarias { get; set; } = 8.00;
     public string Email { get; set; } = string.Empty;
     public byte[] Passhash { get; set; }
     public byte[] Passsalt { get; set; }

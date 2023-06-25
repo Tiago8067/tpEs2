@@ -8,6 +8,11 @@
 <EditForm Model="user" OnValidSubmit="HandleRegistration">
     <DataAnnotationsValidator />
     <div class="mb-3">
+        <label for="nome">Nome</label>
+        <InputText id="nome" @bind-Value="user.Nome" class="form-control" />
+        <ValidationMessage For="@(() => user.Nome)" />
+    </div>
+    <div class="mb-3">
         <label for="email">Email</label>
         <InputText id="email" @bind-Value="user.Email" class="form-control" />
         <ValidationMessage For="@(() => user.Email)" />

@@ -1,5 +1,6 @@
 @page "/projetodetalhes"
 @page "/projetodetalhes/{id}"
+@attribute [Authorize]
 
 @if (string.IsNullOrEmpty(Id))
 {
