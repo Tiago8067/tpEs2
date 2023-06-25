@@ -61,7 +61,7 @@ public class AuthService : IAuthService
         if (user == null)
         {
             response.Success = false; 
-            response.Message = "Utilizador não existe.";
+            response.Message = "Utilizador não existe. Verifique o email.";
         }
         else if (!VerifyPasswordHash(pass, user.Passhash, user.Passsalt))
         {

@@ -1,3 +1,4 @@
+using System.Formats.Tar;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services.TarefaService;
@@ -28,6 +29,7 @@ public class TarefaService : ITarefaService
 
     public async Task<List<Tarefa>> AddTarefa(Tarefa tarefa)
     {
+        tarefa.EstadoTarefa = EstadoDaTarefa.Pendente.ToString();
         _contexta.Tarefas.Add(tarefa);
         await _contexta.SaveChangesAsync();
         return await _contexta.Tarefas.ToListAsync();
