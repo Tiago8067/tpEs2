@@ -1,0 +1,42 @@
+@page "/tarefas_em_curso"
+@attribute [Authorize]
+
+<PageTitle>TarefasEmCurso</PageTitle>
+
+<h3>Bem-Vindo na Página das Tarefas EmCurso</h3>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Curta Decrição</th>
+        <th>Data Hora de Início</th>
+        <th>Tempo Total Despendido até ao momento</th>
+        <th>Estado da Tarefa</th>
+        <th>Projeto Associado</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (var item in Tasks)
+    {
+        @if (item.EstadoTarefa != null && item.EstadoTarefa.Equals("EmCurso"))
+        {
+            <tr>
+                <td>@item.CurtaDescricao</td>
+                <td>@item.DataHoraInicio</td>
+                <td>@(diferenca = (TimeSpan)(tempoTarefa - item.DataHoraInicio))</td>
+                <td>@item.EstadoTarefa</td>
+                @if (@item.ProjetoId is null)
+                {
+                    <td>Não tem projeto associado</td>
+                }
+                else
+                {
+                    <td>@item.Projeto?.Nome</td>
+                }
+            </tr>   
+        }
+    }
+    </tbody>
+</table>

@@ -29,6 +29,18 @@
       <Compile Update="Pages\Login.cs">
         <DependentUpon>Login.razor</DependentUpon>
       </Compile>
+      <Compile Update="Pages\PagesTarefa\AssociaProjeto.cs">
+        <DependentUpon>AssociaProjeto.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\PagesTarefa\TarefaDetalhes.cs">
+        <DependentUpon>TarefaDetalhes.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\PagesTarefa\Tarefas.cs">
+        <DependentUpon>Tarefas.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\PagesTarefa\TarefasEmCurso.cs">
+        <DependentUpon>TarefasEmCurso.razor</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
