@@ -81,18 +81,11 @@ public class TarefaController : ControllerBase
     [HttpPut("tarefas/{tarefaId}/associar/{nomeProj}")]
     //[ProducesResponseType(StatusCodes.Status200OK)]
     //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult AssociarTarefaProjeto(Guid tarefaId, String nomeProj)
+    public async Task<ActionResult<List<Tarefa>>> AssociarTarefaProjeto(Guid tarefaId, String nomeProj)
     {
         var tarefa = _tarefaService.AssociarTarefaProjeto(tarefaId, nomeProj);
 
-        if (tarefa != null)
-        {
-            return Ok(tarefa);
-        }
-        else
-        {
-            return NotFound();
-        }
+        return Ok(tarefa);
     }
 
 

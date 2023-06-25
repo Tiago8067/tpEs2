@@ -95,7 +95,7 @@ public class TarefaService : ITarefaService
         return await _contexta.Tarefas.ToListAsync();
     }
     
-    public Tarefa AssociarTarefaProjeto(Guid tarefaId, String nomeProj)
+    public async Task<List<Tarefa>> AssociarTarefaProjeto(Guid tarefaId, String nomeProj)
     {
         var tarefa = _contexta.Tarefas.FirstOrDefault(t => t.Id == tarefaId);
         var projeto = _contexta.Projetos.FirstOrDefault(p => p.Nome == nomeProj);
@@ -104,14 +104,16 @@ public class TarefaService : ITarefaService
         {
             tarefa.ProjetoId = projeto.Id;
             //_contexta.Tarefas.Update(tarefa);
-            _contexta.SaveChanges();
-            return tarefa;
+            /*_contexta.SaveChanges();
+            return tarefa;*/
         }
-        
-        projeto.Tarefas.Add(tarefa);
+
+        await _contexta.SaveChangesAsync();
+        return await _contexta.Tarefas.ToListAsync();
+        /*projeto.Tarefas.Add(tarefa);
         _contexta.Projetos.Update(projeto);
         
-        return null;
+        return null;*/
     }
 
 }
