@@ -51,6 +51,10 @@ public class TarefaService : ITarefaService
         {
             tarefa.DataHoraFim = DateTime.UtcNow;   
         }
+        else
+        {
+            tarefa.DataHoraFim = null;   
+        }
 
         await _contexta.SaveChangesAsync();
         
