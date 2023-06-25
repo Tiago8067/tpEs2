@@ -9,9 +9,9 @@ public partial class Tarefa
 
     public string? CurtaDescricao { get; set; }
 
-    public DateOnly? DataHoraInicio { get; set; }
+    public DateTime? DataHoraInicio { get; set; }
 
-    public DateOnly? DataHoraFim { get; set; }
+    public DateTime? DataHoraFim { get; set; }
 
     public string? EstadoTarefa { get; set; }
 

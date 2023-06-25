@@ -11,9 +11,10 @@
 <table class="table">
     <thead>
     <tr>
-        <th>Id</th>
+        @*<th>Id</th>*@
         <th>Curta Decrição</th>
         <th>Data Hora de Início</th>
+        <th>Estado da Tarefa</th>
         <th>Data Hora de Fim</th>
         <th>Projeto Associado</th>
     </tr>
@@ -23,9 +24,10 @@
     @foreach (var item in Tasks)
     {
         <tr>
-            <td>@item.Id</td>
+            @*<td>@item.Id</td>*@
             <td>@item.CurtaDescricao</td>
             <td>@item.DataHoraInicio</td>
+            <td>@item.EstadoTarefa</td>
             <td>@item.DataHoraFim</td>
             @if (@item.ProjetoId is null)
             {

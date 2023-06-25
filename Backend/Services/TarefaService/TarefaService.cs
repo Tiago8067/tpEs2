@@ -30,6 +30,7 @@ public class TarefaService : ITarefaService
     public async Task<List<Tarefa>> AddTarefa(Tarefa tarefa)
     {
         tarefa.EstadoTarefa = EstadoDaTarefa.Pendente.ToString();
+        tarefa.DataHoraInicio = DateTime.UtcNow;
         _contexta.Tarefas.Add(tarefa);
         await _contexta.SaveChangesAsync();
         return await _contexta.Tarefas.ToListAsync();
@@ -44,10 +45,13 @@ public class TarefaService : ITarefaService
         }
 
         tarefa.CurtaDescricao = request.CurtaDescricao;
-        tarefa.DataHoraInicio = request.DataHoraInicio;
-        tarefa.DataHoraFim = request.DataHoraFim;
+        //tarefa.DataHoraInicio = request.DataHoraInicio;
         tarefa.EstadoTarefa = request.EstadoTarefa;
-        
+        if (request.EstadoTarefa != null && request.EstadoTarefa.Equals(EstadoDaTarefa.Finalizado.ToString()))
+        {
+            tarefa.DataHoraFim = DateTime.UtcNow;   
+        }
+
         await _contexta.SaveChangesAsync();
         
         return await _contexta.Tarefas.ToListAsync();

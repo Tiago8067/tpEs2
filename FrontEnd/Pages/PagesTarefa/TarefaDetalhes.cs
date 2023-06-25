@@ -8,6 +8,12 @@ public partial class TarefaDetalhes
     protected string Message = string.Empty;
     protected Tarefa Task { get; set; } = new Tarefa();
     
+    private List<string> _estado = new List<string>
+    {
+        "EmCurso",
+        "Finalizado"
+    };
+    
     [Parameter]
     public string Id { get; set; }
     

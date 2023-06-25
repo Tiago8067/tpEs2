@@ -19,14 +19,31 @@ else
             <label class="col-md-3">Curta Decrição</label>
             <InputText type="text" class="col-md-8 form-control" @bind-Value="@Task.CurtaDescricao" required></InputText>
         </div>
-        <div class="form-group">
+        @if (!string.IsNullOrEmpty(Id))
+        {
+            <div class="form-group">
+                <label class="col-md-3">Estado da Tarefa : </label>
+                @*<select>
+                    <option selected disabled="disabled">Selecione : </option>
+                    <option @bind="@Task.EstadoTarefa">@EstadoDaTarefa.EmCurso.ToString()</option>
+                    <option @bind="@Task.EstadoTarefa">@EstadoDaTarefa.Finalizado.ToString()</option>
+                </select>*@
+                <select class="form-control" @bind="@Task.EstadoTarefa">
+                    @foreach (var estado in _estado)
+                    {
+                        <option value="@estado">@estado</option>
+                    }
+                </select>
+            </div>
+        }
+        @*<div class="form-group">
             <label class="col-md-3">Data Hora de Início</label>
             <InputDate class="col-md-8 form-control" @bind-Value="@Task.DataHoraInicio" required></InputDate>
         </div>
         <div class="form-group">
             <label class="col-md-3">Data Hora de Fim</label>
             <InputDate class="col-md-8 form-control" @bind-Value="@Task.DataHoraFim" required></InputDate>
-        </div>
+        </div>*@
         <br />
         
         <div class="form-group">
