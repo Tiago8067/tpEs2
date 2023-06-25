@@ -1,6 +1,7 @@
 using Backend.Services.TarefaService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Newtonsoft.Json.Linq;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal;
 
 namespace Backend.Controllers;
@@ -76,5 +77,23 @@ public class TarefaController : ControllerBase
         Console.WriteLine("saiu controller");
         return Ok(result);
     }
+    
+    [HttpPut("tarefas/{tarefaId}/associar/{nomeProj}")]
+    //[ProducesResponseType(StatusCodes.Status200OK)]
+    //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public IActionResult AssociarTarefaProjeto(Guid tarefaId, String nomeProj)
+    {
+        var tarefa = _tarefaService.AssociarTarefaProjeto(tarefaId, nomeProj);
+
+        if (tarefa != null)
+        {
+            return Ok(tarefa);
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
+
 
 }

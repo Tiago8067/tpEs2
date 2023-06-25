@@ -94,4 +94,24 @@ public class TarefaService : ITarefaService
         
         return await _contexta.Tarefas.ToListAsync();
     }
+    
+    public Tarefa AssociarTarefaProjeto(Guid tarefaId, String nomeProj)
+    {
+        var tarefa = _contexta.Tarefas.FirstOrDefault(t => t.Id == tarefaId);
+        var projeto = _contexta.Projetos.FirstOrDefault(p => p.Nome == nomeProj);
+
+        if (tarefa != null && projeto != null)
+        {
+            tarefa.ProjetoId = projeto.Id;
+            //_contexta.Tarefas.Update(tarefa);
+            _contexta.SaveChanges();
+            return tarefa;
+        }
+        
+        projeto.Tarefas.Add(tarefa);
+        _contexta.Projetos.Update(projeto);
+        
+        return null;
+    }
+
 }
