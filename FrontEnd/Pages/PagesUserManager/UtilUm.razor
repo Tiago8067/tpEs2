@@ -1,0 +1,40 @@
+@page "/utilum"
+@attribute [Authorize(Roles = "UserManager")]
+
+<PageTitle>Utilizadores</PageTitle>
+
+<h3>Bem-Vindo na Página dos Utilizadores</h3>
+
+<a href="@($"UtilUmDetalhes")" class="btn btn-success">Adicionar um Novo Utilizador</a>
+
+<br />
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Nome</th>
+        <th>Horas diárias de tranalho habitual</th>
+        <th>Tipo de Utilizador</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (var item in Utilizadors)
+    {
+        @if (@item.Role.Equals("User"))
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Email</td>
+                <td>@item.Nome</td>
+                <td>@item.Horasdiarias</td>
+                <td>@item.Role</td>
+                <td>
+                    <a href="@($"UtilUmDetalhes/{item.Id}")" class="btn btn-success">Editar</a>
+                </td>
+            </tr>   
+        }
+    }
+    </tbody>
+</table>
