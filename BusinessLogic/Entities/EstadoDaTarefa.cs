@@ -1,6 +1,6 @@
 namespace BusinessLogic.Entities;
 
-public enum EstadoTarefa
+public enum EstadoDaTarefa
 {
     Pendente,
     EmCurso,
