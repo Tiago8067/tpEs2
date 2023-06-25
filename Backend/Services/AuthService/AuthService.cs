@@ -60,8 +60,8 @@ public class AuthService : IAuthService
             .FirstOrDefaultAsync(x => x.Email.ToLower().Equals(email.ToLower()));
         if (user == null)
         {
-            response.Success = false;
-                response.Message = "Utilizador não existe.";
+            response.Success = false; 
+            response.Message = "Utilizador não existe.";
         }
         else if (!VerifyPasswordHash(pass, user.Passhash, user.Passsalt))
         {
